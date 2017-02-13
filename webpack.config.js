@@ -1,21 +1,24 @@
-
+require('dotenv').config();
 const webpack = require('webpack');
 const path = require('path');
-process.env.NODE_ENV = "DEV";
 
 module.exports = {
     plugins :[
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.EnvironmentPlugin([
             "NODE_ENV"
-        ])
+        ]),
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        })
     ],
     context:path.join(__dirname,'src'),
     entry: './main.js',
     output: {
         filename: 'bundle.js',
-        path:path.join(__dirname,'server','public')
+        path:path.join(__dirname,'server','public'),
     },
+    devtool:'cheap-source-map',
     module:{
         rules:[
             {

@@ -1,5 +1,5 @@
 
-
+require('dotenv').config();
 const app = require('./server/app');
 const http = require('http');
 const port = app.get('port');
