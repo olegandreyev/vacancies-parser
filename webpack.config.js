@@ -2,8 +2,9 @@ require('dotenv').config();
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const NODE_ENV = process.env.NODE_ENV;
 
-module.exports = {
+const config = {
     plugins :[
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.EnvironmentPlugin([
@@ -12,8 +13,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.LoaderOptionsPlugin({
             debug: true
-        }),
-        new ExtractTextPlugin('style.css')
+        })
     ],
     context:path.join(__dirname,'src'),
     entry: [
@@ -29,13 +29,19 @@ module.exports = {
         rules:[
             {
                 test:/\.less$|\.css$/,
-                use:ExtractTextPlugin.extract({
+                use: NODE_ENV !== 'DEV' ?
+                    ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: [
                         'css-loader',
                         'less-loader',
                     ]
-                })
+                }) :
+                    [
+                    'style-loader',
+                    'css-loader',
+                    'less-loader'
+                    ]
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
@@ -52,3 +58,9 @@ module.exports = {
         ]
     }
 };
+
+if(NODE_ENV){
+    config.plugins.push(new ExtractTextPlugin('style.css'))
+}
+
+module.exports = config;
