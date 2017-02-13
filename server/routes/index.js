@@ -4,9 +4,9 @@ const vacancies = require('./vacancies');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 
-router.use('/vacancies',vacancies);
+router.use('/vacancies', vacancies);
 
 module.exports = router;
