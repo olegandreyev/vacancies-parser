@@ -28,10 +28,9 @@ if(process.env.NODE_ENV === 'DEV'){
         stats: {
             colors: true
         },
-        progress:true,
-        inline:true,
-        noInfo: false,
-        publicPath: "/"
+        noInfo: true,
+        publicPath: "/",
+        inline: true,
     }));
     app.use(webpackHotMiddleware(compiler))
 }
@@ -45,8 +44,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  res.render('index')
-});
+// app.use(function(req, res, next) {
+//   res.render('index')
+// });
 
 module.exports = app;

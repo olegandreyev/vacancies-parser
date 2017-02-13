@@ -8,17 +8,21 @@ module.exports = {
         new webpack.EnvironmentPlugin([
             "NODE_ENV"
         ]),
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.LoaderOptionsPlugin({
             debug: true
         })
     ],
     context:path.join(__dirname,'src'),
-    entry: './main.js',
+    entry: [
+        'webpack-hot-middleware/client?reload=true&overlay=true',
+        "./main.js",
+    ],
     output: {
         filename: 'bundle.js',
         path:path.join(__dirname,'server','public'),
     },
-    devtool:'cheap-source-map',
+    devtool:'#source-map',
     module:{
         rules:[
             {
