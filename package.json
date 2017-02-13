@@ -25,7 +25,6 @@
     "css-loader": "^0.26.1",
     "dotenv": "^4.0.0",
     "file-loader": "^0.10.0",
-    "i": "^0.3.5",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
