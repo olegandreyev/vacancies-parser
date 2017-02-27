@@ -9,10 +9,10 @@ const rp = require('request-promise');
 const cheerio = require('cheerio');
 const moment = require('moment');
 
-const parseText = require('../../helpers/parse-text');
-const addAdditionalInfo = require('../../helpers/add-additional-inf');
-const promiseQueue = require('../../helpers/promise-queue');
-const getRequestOption = require('../../helpers/request-options');
+const parseText = require('../helpers/parse-text');
+const addAdditionalInfo = require('../helpers/add-additional-inf');
+const promiseQueue = require('../helpers/promise-queue');
+const getRequestOption = require('../helpers/request-options');
 
 class DouUAStrategy {
     constructor(){

@@ -6,13 +6,12 @@ const SEARCH_KEYWORDS = "Программист, Developer, Разработчи
 const VACANCIES_HOST = "https://rabota.ua/";
 
 const rp = require('request-promise');
-const cheerio = require('cheerio');
 const moment = require('moment');
 
-const promiseQueue = require('../../helpers/promise-queue');
-const parseText = require('../../helpers/parse-text');
-const getRequestOption= require('../../helpers/request-options');
-const addAdditionalInfo = require('../../helpers/add-additional-inf');
+const promiseQueue = require('../helpers/promise-queue');
+const parseText = require('../helpers/parse-text');
+const getRequestOption= require('../helpers/request-options');
+const addAdditionalInfo = require('../helpers/add-additional-inf');
 
 
 class RabotaUAStrategy {
