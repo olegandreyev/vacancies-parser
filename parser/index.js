@@ -13,7 +13,7 @@ class Parser {
         this.strategy = strategy;
     }
     parseVacancies(){
-       return this.strategy.parse()
+       return this.strategy.parse();
        //     .then(vacancies => {
        //     if(vacancies.length){
        //         //TODO add vacancies to database
