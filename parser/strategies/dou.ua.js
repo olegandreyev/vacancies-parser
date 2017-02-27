@@ -64,26 +64,6 @@ class DouUAStrategy {
         })
     }
     parse(){
-        /*
-         fields :
-         id
-         link
-         isHot
-         title
-         salary
-         refion
-         shortDescr
-         logo
-         tags
-
-         fullDescr
-         companyLink
-         resource
-         companyName
-         createdAt
-         additionalParams
-
-         */
         return this._getVacancies()
             .then($ => {
              const vacancies = [];
