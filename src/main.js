@@ -11,9 +11,9 @@ class Olej{
 
 }
 
-// fetch('/vacancies/dou').then(res => res.json()).then(data => {
-//     console.log(data, ' data')
-// })
+fetch('/vacancies/dou').then(res => res.json()).then(data => {
+    console.log(data, ' data')
+})
 console.log(process.env.NODE_ENV);
 console.log("HEELLOO");
 console.log("HEELLOO");
