@@ -7,8 +7,12 @@ const VACANCIES_HOST = "https://rabota.ua/";
 
 const rp = require('request-promise');
 const cheerio = require('cheerio');
-const promiseQueue = require('../../lib/promise-queue');
+const moment = require('moment');
 
+const promiseQueue = require('../../helpers/promise-queue');
+const parseText = require('../../helpers/parse-text');
+const getRequestOption= require('../../helpers/request-options');
+const addAdditionalInfo = require('../../helpers/add-additional-inf');
 
 
 class RabotaUAStrategy {
@@ -43,9 +47,11 @@ class RabotaUAStrategy {
                 vacancy.shortDescr = $row.find('.f-vacancylist-shortdescr').text();
                 vacancy.logo = $row.find('.f-vacancylist-companylogo img').attr('src') || null;
                 vacancy.tags = [];
+                vacancy.recource = 'rabota-ua';
                 $row.find('.f-vacancylist-tags').find('a').each((i,el) => {
                     vacancy.tags.push( parseText($(el).text()) )
                 });
+                vacancy.companyLink = VACANCIES_HOST + $row.find('.f-vacancylist-companyname a').attr('href').slice(1);
                 vacancies.push(vacancy)
             });
             return vacancies;
@@ -62,52 +68,30 @@ class RabotaUAStrategy {
                         additionalParams.push($(el).text())
                     });
                     let logo = $('.f-vacancy-logo-container img').attr('src') || null;
-                    let companySite =  $('.f-main-params a.f-text-royal-blue').attr('href') || null;
-                    let companyName = parseText($('span[itemprops="hiringOrganization"]').text());
+                    let companyName = parseText($('span[itemprop="hiringOrganization"]').text());
                     let createdAt = parseText($('.f-vacancy-header-wrapper .f-date-holder').text()) || null;
-                    if(createdAt){
-                        createdAt = new Date(createdAt)
-                    }
                     return {
                         fullDescription,
                         additionalParams,
                         logo,
-                        companySite,
                         companyName,
                         createdAt
                     }
                 })
             });
-            return promises.fireQueue()
-        }).then(results =>{
-            console.log(results,'results')
-
+            return promises.fireQueue().then(results => {
+                return vacancies = vacancies.map((v,i) => {
+                   return addAdditionalInfo(v, results[i])
+                });
+            })
+        }).then(vacancies =>{
+            console.log(vacancies,'results')
 
         }).catch(err => {
             console.log(err)
         })
     }
 }
-
-function parseText(str){
-    return str.replace(/(\r|\t|\n)+/g,'').trim()
-}
-
-function getRequestOption(url, decodeEntities = true){
-    return {
-        uri: url,
-        headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
-        },
-        transform: function (body) {
-            return cheerio.load(body,{
-                decodeEntities
-            })
-        }
-    };
-}
-
-
 
 
 module.exports = RabotaUAStrategy;

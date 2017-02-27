@@ -3,7 +3,11 @@
  */
 
 const RabotaUaStrategy = require('./rabota.ua');
+const WorkUaStrategy = require('./work.ua');
+const DouUaStrategy = require('./dou.ua');
 
 module.exports = {
-    RabotaUA:RabotaUaStrategy
+    RabotaUA:RabotaUaStrategy,
+    WorkUA:WorkUaStrategy,
+    DouUA:DouUaStrategy
 };
