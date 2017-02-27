@@ -2,12 +2,12 @@
  * Created by Olejka on 27.02.2017.
  */
 
-const RabotaUaStrategy = require('./rabota.ua');
-const WorkUaStrategy = require('./work.ua');
-const DouUaStrategy = require('./dou.ua');
+const RabotaUAStrategy = require('./rabota.ua');
+const WorkUAStrategy = require('./work.ua');
+const DouUAStrategy = require('./dou.ua');
 
 module.exports = {
-    RabotaUA:RabotaUaStrategy,
-    WorkUA:WorkUaStrategy,
-    DouUA:DouUaStrategy
+    RabotaUA:RabotaUAStrategy,
+    WorkUA:WorkUAStrategy,
+    DouUA:DouUAStrategy
 };
