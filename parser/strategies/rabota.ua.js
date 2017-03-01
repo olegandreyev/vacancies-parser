@@ -58,9 +58,9 @@ class RabotaUAStrategy {
             const links = vacancies.map(v => v.link);
             const promises = promiseQueue(links,(url) => {
                 return rp( getRequestOption(url, false) ).then($ => {
-                    let fullDescription = $('.d_des').html() || $('.f-vacancy-description').html();
-                    if(fullDescription){
-                        fullDescription = parseText(fullDescription)
+                    let fullDescr = $('.d_des').html() || $('.f-vacancy-description').html();
+                    if(fullDescr){
+                        fullDescr = parseText(fullDescr)
                     }
                     let additionalParams = [];
                     $('.f-additional-params .fd-farmer').each((i, el) => {
@@ -68,13 +68,13 @@ class RabotaUAStrategy {
                     });
                     let logo = $('.f-vacancy-logo-container img').attr('src') || null;
                     let companyName = parseText($('span[itemprop="hiringOrganization"]').text());
-                    let createdAt = parseText($('.f-vacancy-header-wrapper .f-date-holder').text()) || null;
+                    let posted = parseText($('.f-vacancy-header-wrapper .f-date-holder').text()) || null;
                     return {
-                        fullDescription,
+                        fullDescr,
                         additionalParams,
                         logo,
                         companyName,
-                        createdAt
+                        posted
                     }
                 })
             });

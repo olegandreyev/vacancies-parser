@@ -62,14 +62,14 @@ class WorkUAStrategy {
 
                     let dd = $('dd')[0];
                     let companyLink = VACANCIES_HOST + $(dd).find('a').attr('href').slice(1);
-                    let createdAt =  null;
+                    let posted =  null;
 
                     return {
                         fullDescr,
                         additionalParams,
                         logo,
                         companyLink,
-                        createdAt
+                        posted
                     }
                 })
             });

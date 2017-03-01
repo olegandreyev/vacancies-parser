@@ -94,13 +94,13 @@ class DouUAStrategy {
                         }
                         let additionalParams = [];
                         let logo = $('.b-compinfo img').attr('src') || null;
-                        let createdAt = parseText( $('.date').text() );
+                        let posted = parseText( $('.date').text() );
 
                         return {
                             fullDescr,
                             additionalParams,
                             logo,
-                            createdAt
+                            posted
                         }
                     })
                 });
