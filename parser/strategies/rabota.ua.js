@@ -68,13 +68,13 @@ class RabotaUAStrategy {
                     });
                     let logo = $('.f-vacancy-logo-container img').attr('src') || null;
                     let companyName = parseText($('span[itemprop="hiringOrganization"]').text());
-                    let posted = parseText($('.f-vacancy-header-wrapper .f-date-holder').text()) || null;
+                    let postedAt = parseText($('.f-vacancy-header-wrapper .f-date-holder').text()) || null;
                     return {
                         fullDescr,
                         additionalParams,
                         logo,
                         companyName,
-                        posted
+                        postedAt
                     }
                 })
             });

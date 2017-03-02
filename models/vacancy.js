@@ -3,7 +3,7 @@
  */
 
 const mongoose = require('mongoose');
-
+const moment = require('moment');
 const Schema = mongoose.Schema;
 
 const VacancySchema = new Schema({
@@ -20,15 +20,27 @@ const VacancySchema = new Schema({
     resource:String,
     companyLink:String,
     additionalParams:[String],
-    posted:String,
-    companyName:String
+    postedAt:String,
+    companyName:String,
+    meta:{
+        createdAt:{
+            type:Date,
+            default:Date.now()
+        }
+    }
 },{
     _id:false
 });
 
 VacancySchema.statics.removeOld = function(){
-
+    return this.remove({
+        "meta.createdAt":{
+            $lt:moment().subtract(1,'months').toDate()
+        }
+    })
 };
+
+
 
 
 module.exports = mongoose.model("Vacancy", VacancySchema);
