@@ -12,7 +12,7 @@ const DouUAStrategy = require('./parser/strategies').DouUA;
 
 const params = process.argv;
 
-if (params[2] === 'main') {
+if (!params[2]) {
     cp.fork(__dirname + '/parser-run', ['rabota.ua']);
     cp.fork(__dirname + '/parser-run', ['work.ua']);
     cp.fork(__dirname + '/parser-run', ['dou.ua']);
