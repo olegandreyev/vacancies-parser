@@ -16,7 +16,7 @@ const addAdditionalInfo = require('../helpers/add-additional-inf');
 
 class RabotaUAStrategy {
     constructor(){
-        this.currentPage = 1;
+        this.currentPage = 0;
         this.name = 'RABOTA.UA'
     }
     nextPage(){
@@ -51,8 +51,8 @@ class RabotaUAStrategy {
                 $row.find('.f-vacancylist-tags').find('a').each((i,el) => {
                     vacancy.tags.push( parseText($(el).text()) )
                 });
-                let companyLink = VACANCIES_HOST + $row.find('.f-vacancylist-companyname a').attr('href');
-                vacancy.companyLink = companyLink ? companyLink.slice(1) : null;
+                let companyLink = $row.find('.f-vacancylist-companyname a').attr('href');
+                vacancy.companyLink = companyLink ? VACANCIES_HOST +  companyLink.slice(1) : null;
                 vacancy.companyName  = parseText($row.find('.f-vacancylist-companyname').text());
                 vacancies.push(vacancy)
             });

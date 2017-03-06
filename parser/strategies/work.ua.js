@@ -17,7 +17,7 @@ const addAdditionalInfo = require('../helpers/add-additional-inf');
 
 class WorkUAStrategy {
     constructor(){
-        this.currentPage = 1;
+        this.currentPage = 0;
         this.name = 'WORK.UA'
     }
     nextPage(){
@@ -62,7 +62,7 @@ class WorkUAStrategy {
                     let logo = $('.f-vacancy-logo-container img').attr('src') || null;
 
                     let dd = $('dd')[0];
-                    let companyLink = VACANCIES_HOST + $(dd).find('a').attr('href');
+                    let companyLink = $(dd).find('a').attr('href');
                      companyLink = companyLink ? VACANCIES_HOST + companyLink.slice(1) : null;
                     let postedAt =  null;
 
@@ -82,7 +82,8 @@ class WorkUAStrategy {
             })
 
         }).catch(err => {
-            console.log(err)
+            console.log(err, 'error');
+            return [];
         })
     }
 }

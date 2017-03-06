@@ -16,7 +16,7 @@ const getRequestOption = require('../helpers/request-options');
 
 class DouUAStrategy {
     constructor(){
-        this.currentPage = 0;
+        this.currentPage = -1;
         this.csrfToken = null;
         this.cookie = null;
         this.name = 'DOU.UA'
@@ -112,7 +112,8 @@ class DouUAStrategy {
                     });
                 })
         }).catch(err => {
-            console.log(err)
+            console.log(err, 'error');
+             return [];
         })
     }
 }
