@@ -10,19 +10,15 @@ const RabotaUAStrategy = require('./parser/strategies').RabotaUA;
 const WorkUAStrategy = require('./parser/strategies').WorkUA;
 const DouUAStrategy = require('./parser/strategies').DouUA;
 
-if(!process.send) {
-    const rabotaUaParserProcess = cp.fork(__dirname + '/parser-run');
-    const workUaParserProcess = cp.fork(__dirname + '/parser-run');
-    const douUaParserProcess = cp.fork(__dirname + '/parser-run');
+const params = process.argv;
 
-    rabotaUaParserProcess.send({strategy: "rabota.ua"});
-    workUaParserProcess.send({strategy: "work.ua"});
-    douUaParserProcess.send({strategy: "dou.ua"});
-}
-
-const parser = new Parser();
-process.on('message',({strategy}) => {
-    switch (strategy){
+if (params[2] === 'main') {
+    cp.fork(__dirname + '/parser-run', ['rabota.ua']);
+    cp.fork(__dirname + '/parser-run', ['work.ua']);
+    cp.fork(__dirname + '/parser-run', ['dou.ua']);
+} else {
+    const parser = new Parser();
+    switch (params[2]) {
         case "rabota.ua":
             console.log('RABOTA.UA: start parsing!');
             parser.setStrategy(new RabotaUAStrategy());
@@ -48,8 +44,10 @@ process.on('message',({strategy}) => {
                 process.exit(0)
             });
             break;
+        default:
+            break;
     }
-});
+}
 
 
 

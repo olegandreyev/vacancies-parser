@@ -17,7 +17,7 @@ class Parser {
         this.strategy.nextPage();
         let currentPage = this.strategy.getCurrentPage();
         currentPage = this.strategy.name === 'DOU.UA' ? currentPage + 1 : currentPage;
-        if(currentPage > MAX_PAGES){
+        if(currentPage >= MAX_PAGES){
             console.log(`parsed ${this.strategy.name} successfully, parsed ${MAX_PAGES} pages`);
             return true
         }
