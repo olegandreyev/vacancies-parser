@@ -10,7 +10,7 @@ const RabotaUAStrategy = require('./parser/strategies').RabotaUA;
 const WorkUAStrategy = require('./parser/strategies').WorkUA;
 const DouUAStrategy = require('./parser/strategies').DouUA;
 
-if(process.argv[2] === 'main') {
+if(!process.send) {
     const rabotaUaParserProcess = cp.fork(__dirname + '/parser-run');
     const workUaParserProcess = cp.fork(__dirname + '/parser-run');
     const douUaParserProcess = cp.fork(__dirname + '/parser-run');
