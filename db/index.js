@@ -3,6 +3,6 @@
  */
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/aggregator');
+mongoose.connect(process.env.DB_URI);
 
 module.exports = mongoose;

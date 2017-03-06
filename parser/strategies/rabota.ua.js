@@ -17,6 +17,7 @@ const addAdditionalInfo = require('../helpers/add-additional-inf');
 class RabotaUAStrategy {
     constructor(){
         this.currentPage = 1;
+        this.name = 'RABOTA.UA'
     }
     nextPage(){
         this.currentPage++;
@@ -34,11 +35,11 @@ class RabotaUAStrategy {
                 const vacancy = {};
                 const $row = $(row);
 
-                vacancy.id = $row.find('.f-vacancylist-vacancytitle a').attr('href');
-                if(!vacancy.id) return;
+                vacancy._id = $row.find('.f-vacancylist-vacancytitle a').attr('href');
+                if(!vacancy._id) return;
                 const $link = $row.find('.f-vacancylist-vacancytitle a');
                 vacancy.title = parseText($link.text());
-                vacancy.link = VACANCIES_HOST+vacancy.id.slice(1);
+                vacancy.link = VACANCIES_HOST+vacancy._id.slice(1);
                 vacancy.isHot = !!$link.find('.f-vacancylist-characs-block  .fi-hot').length;
                 const salary = $row.find('.-price').text();
                 vacancy.salary = salary ? parseText( salary ) : null;
@@ -50,7 +51,9 @@ class RabotaUAStrategy {
                 $row.find('.f-vacancylist-tags').find('a').each((i,el) => {
                     vacancy.tags.push( parseText($(el).text()) )
                 });
-                vacancy.companyLink = VACANCIES_HOST + $row.find('.f-vacancylist-companyname a').attr('href').slice(1);
+                let companyLink = VACANCIES_HOST + $row.find('.f-vacancylist-companyname a').attr('href');
+                vacancy.companyLink = companyLink ? companyLink.slice(1) : null;
+                vacancy.companyName  = parseText($row.find('.f-vacancylist-companyname').text());
                 vacancies.push(vacancy)
             });
             return vacancies;
@@ -58,7 +61,7 @@ class RabotaUAStrategy {
             const links = vacancies.map(v => v.link);
             const promises = promiseQueue(links,(url) => {
                 return rp( getRequestOption(url, false) ).then($ => {
-                    let fullDescr = $('.d_des').html() || $('.f-vacancy-description').html();
+                    let fullDescr = $('.d_des').html() || $('.f-vacancy-description').html() || $('.descr').html();
                     if(fullDescr){
                         fullDescr = parseText(fullDescr)
                     }
@@ -67,13 +70,11 @@ class RabotaUAStrategy {
                         additionalParams.push($(el).text())
                     });
                     let logo = $('.f-vacancy-logo-container img').attr('src') || null;
-                    let companyName = parseText($('span[itemprop="hiringOrganization"]').text());
                     let postedAt = parseText($('.f-vacancy-header-wrapper .f-date-holder').text()) || null;
                     return {
                         fullDescr,
                         additionalParams,
                         logo,
-                        companyName,
                         postedAt
                     }
                 })
@@ -83,11 +84,9 @@ class RabotaUAStrategy {
                    return addAdditionalInfo(v, results[i])
                 });
             })
-        }).then(vacancies =>{
-            console.log(vacancies,'results')
-
         }).catch(err => {
-            console.log(err)
+            console.log(err, 'error');
+            return [];
         })
     }
 }

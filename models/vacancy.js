@@ -7,7 +7,7 @@ const moment = require('moment');
 const Schema = mongoose.Schema;
 
 const VacancySchema = new Schema({
-    _id:Schema.Types.ObjectId,
+    _id:String,
     title:String,
     link:String,
     isHot:Boolean,

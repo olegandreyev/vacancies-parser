@@ -19,6 +19,7 @@ class DouUAStrategy {
         this.currentPage = 0;
         this.csrfToken = null;
         this.cookie = null;
+        this.name = 'DOU.UA'
     }
     nextPage(){
         this.currentPage++;
@@ -50,7 +51,7 @@ class DouUAStrategy {
                 jar,
                 formData:{
                     csrfmiddlewaretoken:this.csrfToken,
-                    count:this.currentPage*25
+                    count:this.currentPage*40
                 },
                 headers:{
                     "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36",
@@ -70,14 +71,15 @@ class DouUAStrategy {
             $('li.l-vacancy').each((i, row) => {
                 const vacancy = {};
                 const $row = $(row);
-                vacancy.id = $row.find('a.vt').attr('href').replace('?from=list_hot',"");
+                vacancy._id = $row.find('a.vt').attr('href').replace('?from=list_hot',"");
+                if(!vacancy._id)return;
                 vacancy.region =  parseText( $row.find('span.cities').text().replace("?","") );
                 vacancy.title = parseText( $row.find('a.vt').text() );
                 vacancy.companyName = parseText( $row.find('a.company').text()) ;
                 vacancy.shortDescr = parseText( $row.find('.sh-info').text() ) || null;
                 vacancy.salary = parseText( $row.find('.salary').text() ) || null;
                 vacancy.tags = [];
-                vacancy.link = vacancy.id;
+                vacancy.link = vacancy._id;
                 vacancy.companyLink = $row.find('a.company').attr("href");
                 vacancy.recource = 'dou-ua';
                 vacancy.isHot = $row.is(".__hot");
@@ -109,8 +111,6 @@ class DouUAStrategy {
                         return addAdditionalInfo(v, results[i])
                     });
                 })
-        }).then(fullVacancies => {
-            console.log(fullVacancies,'fuul vacancies')
         }).catch(err => {
             console.log(err)
         })

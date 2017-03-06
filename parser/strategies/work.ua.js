@@ -18,6 +18,7 @@ const addAdditionalInfo = require('../helpers/add-additional-inf');
 class WorkUAStrategy {
     constructor(){
         this.currentPage = 1;
+        this.name = 'WORK.UA'
     }
     nextPage(){
         this.currentPage++;
@@ -34,9 +35,9 @@ class WorkUAStrategy {
                 const $row = $(row);
                 const vacancy = {};
                 const $link = $row.find('h2 a');
-                vacancy.id = $link.attr('href');
-                if(!vacancy.id) return;
-                vacancy.link = VACANCIES_HOST+vacancy.id.slice(1);
+                vacancy._id = $link.attr('href');
+                if(!vacancy._id) return;
+                vacancy.link = VACANCIES_HOST+vacancy._id.slice(1);
                 vacancy.recource = 'work-ua'
                 vacancy.title = parseText( $link.text() );
                 vacancy.salary = parseText( $link.next().text().replace(",", '') ) || null;
@@ -61,7 +62,8 @@ class WorkUAStrategy {
                     let logo = $('.f-vacancy-logo-container img').attr('src') || null;
 
                     let dd = $('dd')[0];
-                    let companyLink = VACANCIES_HOST + $(dd).find('a').attr('href').slice(1);
+                    let companyLink = VACANCIES_HOST + $(dd).find('a').attr('href');
+                     companyLink = companyLink ? VACANCIES_HOST + companyLink.slice(1) : null;
                     let postedAt =  null;
 
                     return {
@@ -79,8 +81,6 @@ class WorkUAStrategy {
                 });
             })
 
-        }).then(fullInfoVacancies => {
-            console.log(fullInfoVacancies,'fuul info')
         }).catch(err => {
             console.log(err)
         })
