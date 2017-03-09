@@ -5,15 +5,9 @@
 
 require('./styles/style.less');
 
-class Olej{
-    constructor(props){
-    }
-
-}
-
-fetch('/vacancies/dou').then(res => res.json()).then(data => {
-    console.log(data, ' data')
-})
-console.log(process.env.NODE_ENV);
-console.log("HEELLOO");
-console.log("HEELLOO");
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import { Router, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
