@@ -7,6 +7,7 @@ import * as reducers from 'reducers'
 import { browserHistory } from 'react-router'
 import {routerReducer, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form'
 
 export default function() {
 
@@ -22,7 +23,8 @@ export default function() {
     return createStore(
         combineReducers({
             ...reducers,
-            routing: routerReducer
+            routing: routerReducer,
+            form: formReducer
         }),
         composeEnhancers(
             applyMiddleware(thunk, rrMiddleware)
