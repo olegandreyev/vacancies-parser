@@ -25,6 +25,9 @@ module.exports = {
         path:path.join(__dirname,'server','public'),
     },
     devtool:'#source-map',
+    resolve: {
+        modules: ["node_modules",path.join(__dirname,'src')]
+    },
     module:{
         rules:[
             {
