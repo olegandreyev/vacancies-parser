@@ -27,6 +27,7 @@ if(process.env.NODE_ENV === 'DEV'){
         stats: {
             colors: true
         },
+        noInfo: true,
         publicPath: "/",
         inline: true,
     }));

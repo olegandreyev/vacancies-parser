@@ -3,11 +3,41 @@
  */
 
 import React from 'react'
+import {Card, CardHeader, CardText, RaisedButton, CardActions, TextField, Divider } from 'material-ui';
+import {deepPurple600} from 'material-ui/styles/colors'
 
 export default class LoginForm extends React.Component {
     render(){
         return (
-            <div>Login Form</div>
+            <Card className="login-form">
+                <CardHeader
+                    title="Login"
+                    titleColor="white"
+                    style={{backgroundColor:deepPurple600}}
+                    titleStyle={{fontSize:21}}
+                />
+                <CardText style={{paddingTop:0}}>
+                    <TextField
+                        hintText="Username"
+                        floatingLabelText="Username"
+                        fullWidth={true}
+                        />
+                    <br/>
+                    <TextField
+                        hintText="Password"
+                        floatingLabelText="Password"
+                        fullWidth={true}
+                        type="password"/>
+                </CardText>
+                <CardActions style={{textAlign:'right'}}>
+                    <RaisedButton label="Login" secondary={true} />
+                </CardActions>
+                <Divider/>
+                <CardActions className="login-form-another-actions" style={{padding:12}}>
+                    <span className="mute-color">Forgot Your Password?</span>
+                    <span className="mute-color">Register</span>
+                </CardActions>
+            </Card>
         )
     }
 }

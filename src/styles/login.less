@@ -1,0 +1,22 @@
+
+@import 'mixins';
+
+.login-form-wrapper{
+  .abs();
+  .childrenInCenter();
+  .login-form{
+    width: 400px;
+  }
+}
+
+.login-form-another-actions{
+   display: flex;
+   justify-content: space-between;
+    span{
+      cursor: pointer;
+      transition: color ease-out .3s;
+      &:hover{
+        color: black;
+      }
+    }
+}
