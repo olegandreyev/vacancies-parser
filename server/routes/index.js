@@ -7,6 +7,8 @@ const passport = require('passport');
 const requireLogin = passport.authenticate('local', { session: false });
 const requireAuth = passport.authenticate('jwt', { session: false });
 
+const apiRoutes = require('./api');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -19,9 +21,7 @@ router.post('/register', AuthMiddleware.register);
 router.post('/login', requireLogin, AuthMiddleware.login);
 
 // Set url for API group routes
-router.use('/api', requireAuth, function(req, res){
-  res.send(req.user)
-});
+router.use('/api', requireAuth, apiRoutes);
 
 
 
