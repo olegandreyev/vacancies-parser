@@ -38,7 +38,7 @@ class WorkUAStrategy {
                 vacancy._id = $link.attr('href');
                 if(!vacancy._id) return;
                 vacancy.link = VACANCIES_HOST+vacancy._id.slice(1);
-                vacancy.recource = 'work-ua'
+                vacancy.resource = 'work-ua';
                 vacancy.title = parseText( $link.text() );
                 vacancy.salary = parseText( $link.next().text().replace(",", '') ) || null;
                 vacancy.isHot = !!$row.find('.label-hot').length;

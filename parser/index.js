@@ -26,7 +26,7 @@ class Parser {
            if(vacancies.length){
               return Vacancy.insertMany(vacancies,{ordered:false})
                   .then(mongooseDocuments => {
-                       console.log(`parsed ${this.strategy.name} successfully, new docs: ${mongooseDocuments.length}`);
+                       console.log(`parsed ${this.strategy.name} page #${currentPage} successfully, new docs: ${mongooseDocuments.length}`);
                        return this.parseVacancies();
                    }, err => {
                       if(err.code === 11000){

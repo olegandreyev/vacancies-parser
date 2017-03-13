@@ -43,11 +43,11 @@ class RabotaUAStrategy {
                 vacancy.isHot = !!$link.find('.f-vacancylist-characs-block  .fi-hot').length;
                 const salary = $row.find('.-price').text();
                 vacancy.salary = salary ? parseText( salary ) : null;
-                vacancy.region = parseText( $row.find('.f-vacancylist-characs-block  .fd-soldier:not(.f-text-royal-blue)').text() );
+                vacancy.region = parseText( $row.find('p[class="fd-merchant"]').text() );
                 vacancy.shortDescr = $row.find('.f-vacancylist-shortdescr').text();
                 vacancy.logo = $row.find('.f-vacancylist-companylogo img').attr('src') || null;
                 vacancy.tags = [];
-                vacancy.recource = 'rabota-ua';
+                vacancy.resource = 'rabota-ua';
                 $row.find('.f-vacancylist-tags').find('a').each((i,el) => {
                     vacancy.tags.push( parseText($(el).text()) )
                 });

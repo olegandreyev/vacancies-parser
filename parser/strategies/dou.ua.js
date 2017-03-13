@@ -81,7 +81,7 @@ class DouUAStrategy {
                 vacancy.tags = [];
                 vacancy.link = vacancy._id;
                 vacancy.companyLink = $row.find('a.company').attr("href");
-                vacancy.recource = 'dou-ua';
+                vacancy.resource = 'dou-ua';
                 vacancy.isHot = $row.is(".__hot");
                 vacancies.push(vacancy)
             });

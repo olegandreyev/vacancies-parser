@@ -17,7 +17,11 @@ const VacancySchema = new Schema({
     fullDescr:String,
     logo:String,
     tags:Array,
-    resource:String,
+    resource:{
+        required:true,
+        type:String,
+        enum: ['work-ua', 'rabota-ua', 'dou-ua'],
+    },
     companyLink:String,
     additionalParams:[String],
     postedAt:String,
