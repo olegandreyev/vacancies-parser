@@ -3,11 +3,7 @@
  */
 
 const jwt = require('jsonwebtoken'),
-    crypto = require('crypto'),
     User = require('../../models/user');
-
-
-
 
 
 exports.login = function(req, res, next) {
@@ -18,6 +14,8 @@ exports.login = function(req, res, next) {
         user: userInfo
     });
 };
+
+
 
 exports.register = function(req, res, next) {
     // Check for registration errors
