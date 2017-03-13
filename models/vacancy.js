@@ -25,15 +25,10 @@ const VacancySchema = new Schema({
     companyLink:String,
     additionalParams:[String],
     postedAt:String,
-    companyName:String,
-    meta:{
-        createdAt:{
-            type:Date,
-            default:Date.now()
-        }
-    }
+    companyName:String
 },{
-    _id:false
+    _id:false,
+    timestamps:true
 });
 
 VacancySchema.statics.removeOld = function(){
