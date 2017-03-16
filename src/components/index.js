@@ -3,3 +3,4 @@
  */
 
 export LoginForm from './login/login-form'
+export RegisterFormWizard from './register/register-wizard'

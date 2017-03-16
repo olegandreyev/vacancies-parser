@@ -5,6 +5,7 @@
 import React from 'react'
 import {Card, CardHeader, CardText, RaisedButton, CardActions, TextField, Divider } from 'material-ui';
 import {deepPurple600} from 'material-ui/styles/colors'
+import { Link } from 'react-router'
 
 export default class LoginForm extends React.Component {
     render(){
@@ -35,7 +36,7 @@ export default class LoginForm extends React.Component {
                 <Divider/>
                 <CardActions className="login-form-another-actions" style={{padding:12}}>
                     <span className="mute-color">Forgot Your Password?</span>
-                    <span className="mute-color">Register</span>
+                    <Link to="register"><span className="mute-color no-underline">Register</span></Link>
                 </CardActions>
             </Card>
         )

@@ -13,7 +13,7 @@ import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import configureStore from './configure-store'
-import { App, Login } from 'routes';
+import { App, Login, Register } from 'routes';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -23,7 +23,7 @@ ReactDOM.render(
         <Router history={history}>
             <Route path="/" component={App}>
                 <Route path="login" component={Login}/>
-
+                <Route path="register" component={Register}>/</Route>
             </Route>
         </Router>
     </Provider>,
