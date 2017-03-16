@@ -4,7 +4,7 @@
 
 
 import React from 'react';
-import {TextField, RaisedButton, FlatButton, Card, CardHeader, CardText} from 'material-ui'
+import { Card, CardHeader, CardText } from 'material-ui'
 import {
     Step,
     Stepper,
@@ -12,7 +12,9 @@ import {
 } from 'material-ui/Stepper';
 import { pink500 } from 'material-ui/styles/colors'
 import ExpandTransition from 'material-ui/internal/ExpandTransition';
-import { Link } from 'react-router'
+import RegisterPage1 from './register-page-1';
+import RegisterPage2 from './register-page-2';
+import RegisterPage3 from './register-page-3';
 
 class RegisterFormWizard extends React.Component {
 
@@ -48,84 +50,21 @@ class RegisterFormWizard extends React.Component {
             }));
         }
     };
-
-    getStepContent(stepIndex) {
-        switch (stepIndex) {
+    renderFormStep(){
+        switch (this.state.stepIndex){
             case 0:
-                return (
-                    <p>
-                        Select campaign settings. Campaign settings can include your budget, network, bidding
-                        options and adjustments, location targeting, campaign end date, and other settings that
-                        affect an entire campaign.
-                    </p>
-                );
+                return <RegisterPage1 onSubmit={this.handleNext}/>;
             case 1:
-                return (
-                    <div>
-                        <TextField style={{marginTop: 0}} floatingLabelText="Ad group name"/>
-                        <p>
-                            Ad group status is different than the statuses for campaigns, ads, and keywords, though the
-                            statuses can affect each other. Ad groups are contained within a campaign, and each campaign
-                            can
-                            have one or more ad groups. Within each ad group are ads, keywords, and bids.
-                        </p>
-                        <p>Something something whatever cool</p>
-                    </div>
-                );
+                return <RegisterPage2 prevPage={this.handlePrev} onSubmit={this.handleNext}/>;
             case 2:
-                return (
-                    <p>
-                        Try out different ad text to see what brings in the most customers, and learn how to
-                        enhance your ads using features like ad extensions. If you run into any problems with your
-                        ads, find out how to tell if they're running and how to resolve approval issues.
-                    </p>
-                );
+                return <RegisterPage3 prevPage={this.handlePrev} onSubmit={this.props.onSubmit}/>;
             default:
-                return 'You\'re a long way from home sonny jim!';
+                return <p>Unknown Page</p>
         }
     }
-
-    renderContent() {
-        const {finished, stepIndex} = this.state;
-        const contentStyle = {margin: '0 16px', overflow: 'hidden'};
-        const { handleSubmit } = this.props;
-
-        if (finished) {
-            return (
-                <div style={contentStyle}>
-                    <h3>
-                        You have been registered in system!
-                    </h3>
-                    <p>
-                        Congratulations, now you can go to <Link to="login" className='underline'>Login Page </Link>
-                        using your email and password
-                    </p>
-                </div>
-            );
-        }
-
-        return (
-            <div style={contentStyle}>
-                <div>{this.getStepContent(stepIndex)}</div>
-                <div style={{marginTop: 24, marginBottom: 12}}>
-                    <FlatButton
-                        label="Back"
-                        disabled={stepIndex === 0}
-                        onTouchTap={this.handlePrev}
-                        style={{marginRight: 12}}
-                    />
-                    <RaisedButton
-                        label={stepIndex === 2 ? 'Finish' : 'Next'}
-                        primary={true}
-                        onTouchTap={this.handleNext}
-                    />
-                </div>
-            </div>
-        );
-    }
-
     render() {
         const {loading, stepIndex} = this.state;
+        const { error } = this.props;
 
         return (
             <Card style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
@@ -148,7 +87,7 @@ class RegisterFormWizard extends React.Component {
                         </Step>
                     </Stepper>
                     <ExpandTransition loading={loading} open={true}>
-                        {this.renderContent()}
+                        {this.renderFormStep()}
                     </ExpandTransition>
                 </CardText>
             </Card>
