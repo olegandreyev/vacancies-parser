@@ -63,5 +63,21 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
     });
 };
 
+UserSchema.statics.exists = function (email) {
+    return new Promise((res, rej) => {
+        return this.find({email})
+            .then(result => {
+                if(result.length){
+                    res(true)
+                } else {
+                    res(false)
+                }
+            }).catch(err => {
+                rej(err)
+            })
+    })
+
+};
+
 module.exports = mongoose.model('User', UserSchema);
 

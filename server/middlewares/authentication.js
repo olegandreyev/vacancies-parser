@@ -15,7 +15,14 @@ exports.login = function(req, res, next) {
     });
 };
 
-
+exports.inUniqueEmail = function(req, res, next) {
+    const email = req.body.email;
+    User.exists(email)
+        .then((result) => {
+            res.send(result)
+        })
+        .catch(next)
+};
 
 exports.register = function(req, res, next) {
     // Check for registration errors
@@ -57,15 +64,9 @@ exports.register = function(req, res, next) {
         user.save(function(err, user) {
             if (err) { return next(err); }
 
-            // Subscribe member to Mailchimp list
-            // mailchimp.subscribeToNewsletter(user.email);
-
-            // Respond with JWT if user was created
-
             let userInfo = setUserInfo(user);
 
             res.status(201).json({
-                token:"JWT "+generateToken(userInfo),
                 user: userInfo
             });
         });

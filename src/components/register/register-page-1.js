@@ -7,11 +7,25 @@ import { Field, reduxForm } from 'redux-form'
 import { FlatButton, RaisedButton } from 'material-ui'
 import { renderTextField } from 'helpers'
 import validate from './validateForm'
+import axios from 'axios'
+
+const isUniqueEmail = (values) => {
+    return axios.post("/isUniqueEmail", {email:values.email})
+        .then(result => {
+            if(result.data){
+                throw {email:"Already Exists!"}
+            }
+        }, err => {
+            throw {email:"Unknown Error!"}
+        })
+};
 
 @reduxForm({
     form:"registerForm",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
+    asyncValidate: isUniqueEmail,
+    asyncBlurFields: [ 'email' ],
     validate
 })
 class RegisterPage1 extends React.Component {

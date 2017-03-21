@@ -5,10 +5,10 @@
 import React from 'react';
 import {RegisterFormWizard} from 'components'
 import axios from 'axios'
-import {SubmissionError} from 'redux-form'
+import { SubmissionError } from 'redux-form'
 
 class Register extends React.Component {
-    submitRegisterForm(values) {
+    submitRegisterForm = (values) =>  {
         return axios.post('/register', values)
             .then(response => {
                 console.log(response)
@@ -19,7 +19,7 @@ class Register extends React.Component {
                     throw new SubmissionError({_error:data.error})
                 }
             })
-    }
+    };
 
     render() {
         return (

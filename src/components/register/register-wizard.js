@@ -4,7 +4,7 @@
 
 
 import React from 'react';
-import { Card, CardHeader, CardText } from 'material-ui'
+import { Card, CardHeader, CardText, FontIcon } from 'material-ui'
 import {
     Step,
     Stepper,
@@ -50,6 +50,20 @@ class RegisterFormWizard extends React.Component {
             }));
         }
     };
+    submitForm = (values) => {
+        const {stepIndex} = this.state;
+        this.setState({
+            loading:true,
+        });
+        return this.props.onSubmit(values)
+            .then(() => {
+               this.setState({
+                   finished:true,
+                   stepIndex:stepIndex + 1,
+                   loading:false
+               })
+            })
+    };
     renderFormStep(){
         switch (this.state.stepIndex){
             case 0:
@@ -57,7 +71,12 @@ class RegisterFormWizard extends React.Component {
             case 1:
                 return <RegisterPage2 prevPage={this.handlePrev} onSubmit={this.handleNext}/>;
             case 2:
-                return <RegisterPage3 prevPage={this.handlePrev} onSubmit={this.props.onSubmit}/>;
+                return <RegisterPage3 prevPage={this.handlePrev} onSubmit={this.submitForm}/>;
+            case 3:
+                return <p>
+                    <FontIcon className="fa fa-envelope-o" style={{marginRight:5}}/>
+                    The confirmation link has been sent to your mailing address
+                </p>;
             default:
                 return <p>Unknown Page</p>
         }

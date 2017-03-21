@@ -17,7 +17,7 @@ import validate from './validateForm'
 })
 class RegisterPage3 extends React.Component {
     render(){
-        const { handleSubmit, prevPage, error } = this.props;
+        const { handleSubmit, prevPage, error, submitting } = this.props;
         return (
             <form onSubmit={handleSubmit}>
                 <p>
@@ -30,7 +30,7 @@ class RegisterPage3 extends React.Component {
                 </div>
                 <div className="register-form-btns" >
                     <FlatButton label="Back" onTouchTap={prevPage} />
-                    <RaisedButton onTouchTap={handleSubmit} label="Finish" primary={true} />
+                    <RaisedButton disabled={submitting} onTouchTap={handleSubmit} label="Finish" primary={true} />
                 </div>
                 <div className="register-form-errors" style={{color:red500}}>
                     {error && <strong>

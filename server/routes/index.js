@@ -17,6 +17,9 @@ router.get('/', function(req, res, next) {
 // Registration route
 router.post('/register', AuthMiddleware.register);
 
+//Check email on existing
+router.post('/isUniqueEmail',AuthMiddleware.inUniqueEmail);
+
 // Login route
 router.post('/login', requireLogin, AuthMiddleware.login);
 
