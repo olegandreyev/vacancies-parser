@@ -3,7 +3,9 @@
  */
 
 const jwt = require('jsonwebtoken'),
-    User = require('../../models/user');
+    User = require('../../models/user'),
+    sendEmail = require('../../lib/sendEmail'),
+    url = require('url');
 
 
 exports.login = function(req, res, next) {
@@ -16,7 +18,7 @@ exports.login = function(req, res, next) {
 };
 
 exports.inUniqueEmail = function(req, res, next) {
-    const email = req.body.email;
+    const email = req.body.email.toLowerCase();
     User.exists(email)
         .then((result) => {
             res.send(result)
@@ -58,26 +60,52 @@ exports.register = function(req, res, next) {
         let user = new User({
             email: email,
             password: password,
-            profile: { firstName: firstName, lastName: lastName }
+            profile: { firstName: firstName, lastName: lastName },
+            emailConfirmationToken: generateToken({
+                email,
+                password,
+                firstName,
+                lastName
+            })
         });
 
         user.save(function(err, user) {
             if (err) { return next(err); }
 
-            let userInfo = setUserInfo(user);
-
-            res.status(201).json({
-                user: userInfo
+            sendEmail(user.email,`
+                Please click <a href="http://localhost:3000/confirmEmail?token=${user.emailConfirmationToken}">this link</a>
+                to verify your email address (This link will be valid 6 hours)
+            `).catch(err => {
+                console.log("error", err)
             });
+
+
+            res.status(201).end();
         });
+    });
+};
+
+exports.confirmEmail = function(req, res, next){
+    const query = url.parse(req.url, true).query;
+    const token = query.token;
+    jwt.verify(token, process.env.JWT_SECRET, function(err, payload) {
+        if(err){
+            res.redirect("/login?emailConfirmStatus=false")
+        }
+        User.findOneAndUpdate({emailConfirmationToken:token},{ isEmailVerified: true }, function(err, result) {
+            if(err){
+                next(err);
+            }
+            res.redirect("/login?emailConfirmStatus=true")
+        })
     });
 };
 
 
 
-function generateToken(user) {
+function generateToken(user, expires) {
     return jwt.sign(user, process.env.JWT_SECRET, {
-        expiresIn: 10080 // in seconds
+        expiresIn: expires || 21600 // in seconds
     });
 }
 

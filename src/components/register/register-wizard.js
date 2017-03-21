@@ -75,7 +75,7 @@ class RegisterFormWizard extends React.Component {
             case 3:
                 return <p>
                     <FontIcon className="fa fa-envelope-o" style={{marginRight:5}}/>
-                    The confirmation link has been sent to your mailing address
+                    The confirmation link has been sent to your mailing address. This link will be valid for 6 hours
                 </p>;
             default:
                 return <p>Unknown Page</p>

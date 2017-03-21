@@ -24,7 +24,7 @@ export default function() {
         combineReducers({
             ...reducers,
             routing: routerReducer,
-            form: formReducer
+            form: formReducer,
         }),
         composeEnhancers(
             applyMiddleware(thunk, rrMiddleware)

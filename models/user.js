@@ -31,8 +31,12 @@ const UserSchema = new Schema({
             enum: ['Member', 'Admin', 'HH'],
             default: 'Member'
         },
-        resetPasswordToken: { type: String },
-        resetPasswordExpires: { type: Date }
+        resetPasswordToken: { type: String , default:null },
+        emailConfirmationToken: { type:String },
+        isEmailVerified:{
+            type:Boolean,
+            default:false
+        }
     },
     {
         timestamps: true

@@ -21,7 +21,11 @@ router.post('/register', AuthMiddleware.register);
 router.post('/isUniqueEmail',AuthMiddleware.inUniqueEmail);
 
 // Login route
-router.post('/login', requireLogin, AuthMiddleware.login);
+router.post('/auth', requireLogin, AuthMiddleware.login);
+
+//confirm email route
+router.get("/confirmEmail", AuthMiddleware.confirmEmail);
+
 
 // Set url for API group routes
 router.use('/api', requireAuth, apiRoutes);
