@@ -21,7 +21,7 @@ router.post('/register', AuthMiddleware.register);
 router.post('/isUniqueEmail',AuthMiddleware.inUniqueEmail);
 
 // Login route
-router.post('/auth', requireLogin, AuthMiddleware.login);
+router.post('/auth', requireLogin, AuthMiddleware.isEmailVerified, AuthMiddleware.login);
 
 //confirm email route
 router.get("/confirmEmail", AuthMiddleware.confirmEmail);

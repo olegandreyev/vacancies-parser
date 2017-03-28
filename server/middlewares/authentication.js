@@ -8,6 +8,22 @@ const jwt = require('jsonwebtoken'),
     url = require('url');
 
 
+exports.isEmailVerified = function(req, res, next){
+    if(req.user.isEmailVerified){
+        next()
+    } else {
+        sendEmail(user.email,`
+                Please click <a href="http://localhost:3000/confirmEmail?token=${user.emailConfirmationToken}">this link</a>
+                to verify your email address (This link will be valid 6 hours)
+            `).catch(err => {
+            console.log("error", err)
+        });
+        res.status(403).json({
+            error:"Please verify your email address! The verification link was sent on your email address!"
+        })
+    }
+};
+
 exports.login = function(req, res, next) {
     let userInfo = setUserInfo(req.user);
 
@@ -115,6 +131,7 @@ function setUserInfo(request) {
         firstName: request.profile.firstName,
         lastName: request.profile.lastName,
         email: request.email,
+        isEmailVerified: request.isEmailVerified,
         role: request.role,
     };
 }

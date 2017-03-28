@@ -8,7 +8,7 @@ mongoose.connect(process.env.DB_URI,{
     server: {
         socketOptions: {
             socketTimeoutMS: 0,
-            connectTimeoutMS: 0
+            connectTimeout: 0
         }
     }
 });
