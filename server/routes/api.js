@@ -16,6 +16,7 @@ function setUserInfo(request) {
         _id: request._id,
         firstName: request.profile.firstName,
         lastName: request.profile.lastName,
+        isEmailVerified: request.isEmailVerified,
         email: request.email,
         role: request.role,
     };

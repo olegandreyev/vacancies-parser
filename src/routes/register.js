@@ -4,12 +4,12 @@
 
 import React from 'react';
 import {RegisterFormWizard} from 'components'
-import axios from 'axios'
+import { client }  from 'helpers'
 import { SubmissionError } from 'redux-form'
 
 class Register extends React.Component {
     submitRegisterForm = (values) =>  {
-        return axios.post('/register', values)
+        return client.post('/register', values)
             .then(response => {
                 console.log(response)
             })

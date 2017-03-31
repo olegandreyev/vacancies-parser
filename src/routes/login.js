@@ -7,10 +7,12 @@ import {connect} from 'react-redux'
 import {LoginForm} from 'components'
 import {replace} from 'react-router-redux'
 import {SubmissionError} from 'redux-form'
-import axios from 'axios'
+import { client }  from 'helpers'
+import { authSuccess } from 'actions'
 
 @connect(null, {
-    redirect: replace
+    redirect: replace,
+    authSuccess
 })
 export default class Login extends React.Component {
     state = {
@@ -32,9 +34,10 @@ export default class Login extends React.Component {
     }
 
     onSubmitForm = (values) => {
-        return axios.post("/auth", values)
+        const { authSuccess } = this.props;
+        return client.post("/auth", values)
             .then(response => {
-                console.log(response)
+                authSuccess(response.data)
             }).catch(err => {
                 const status = err.response.status;
                 if (status === 401) {

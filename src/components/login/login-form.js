@@ -24,7 +24,7 @@ import {renderTextField} from 'helpers'
 })
 export default class LoginForm extends React.Component {
     render() {
-        const {handleSubmit, error} = this.props;
+        const {handleSubmit, error, submitting} = this.props;
         return (
             <Card className="login-form">
                 <CardHeader
@@ -44,7 +44,7 @@ export default class LoginForm extends React.Component {
                     </div>
                 </CardText>
                 <CardActions style={{textAlign: 'right'}}>
-                    <RaisedButton onClick={handleSubmit} label="Login" secondary={true}/>
+                    <RaisedButton disabled={submitting} onClick={handleSubmit} label="Login" secondary={true}/>
                 </CardActions>
                 <Divider/>
                 <CardActions className="login-form-another-actions" style={{padding: 12}}>

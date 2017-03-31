@@ -8,11 +8,12 @@ const initialState = {
     isAuthenticated:false
 };
 
-import { AUTH_SUCCESS } from 'constants';
+import { AUTH_SUCCESS, SET_USER } from 'app_constants';
 
 export default function(state = initialState,{type, payload}){
     switch (type){
         case AUTH_SUCCESS:
+        case SET_USER:
             const {user, token} = payload;
             return {
                 user,

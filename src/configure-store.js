@@ -8,6 +8,7 @@ import { browserHistory } from 'react-router'
 import {routerReducer, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
+import { authMiddleware } from 'middlewares'
 
 export default function() {
 
@@ -27,7 +28,7 @@ export default function() {
             form: formReducer,
         }),
         composeEnhancers(
-            applyMiddleware(thunk, rrMiddleware)
+            applyMiddleware(thunk, rrMiddleware, authMiddleware)
         )
     );
 }
