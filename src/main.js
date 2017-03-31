@@ -35,6 +35,8 @@ const checkAuth = (nextState, replace, callback) => {
                     token
                 }));
                 callback();
+            }).catch(err => {
+                console.log("Login Failed!", err)
             })
         } else {
             callback();
