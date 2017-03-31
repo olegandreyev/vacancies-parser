@@ -2,7 +2,7 @@
  * Created by Olejka on 27.02.2017.
  */
 
-
+const DB = require('../db/index');
 const Vacancy = require('../models').Vacancy;
 const MAX_PAGES = process.env.MAX_PAGE_PARSE;
 

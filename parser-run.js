@@ -2,8 +2,6 @@
  * Created by Olejka on 27.02.2017.
  */
 require('dotenv').config();
-const DB = require('./db/index');
-const Parser = require('./parser');
 const cp = require('child_process');
 
 const RabotaUAStrategy = require('./parser/strategies').RabotaUA;
@@ -17,6 +15,7 @@ if (!params[2]) {
     cp.fork(__dirname + '/parser-run', ['work.ua']);
     cp.fork(__dirname + '/parser-run', ['dou.ua']);
 } else {
+    const Parser = require('./parser');
     const parser = new Parser();
     switch (params[2]) {
         case "rabota.ua":

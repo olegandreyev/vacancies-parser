@@ -39,7 +39,4 @@ VacancySchema.statics.removeOld = function(){
     })
 };
 
-
-
-
 module.exports = mongoose.model("Vacancy", VacancySchema);
