@@ -4,12 +4,41 @@
 
 const express = require('express');
 const router = express.Router();
-
+const Vacancy = require('../../models/vacancy');
+const url = require('url');
+const _pageSize = 15;
 
 router.get('/me',(req, res) => {
     res.send( setUserInfo(req.user) )
 });
 
+
+router.get("/vacancies",(req, res, next) => {
+    const urlObj = url.parse( decodeURIComponent(req.url), true);
+    let query = urlObj.query;
+    if(!Number.isInteger( parseInt(query.page) )) {
+        res.status(400).send({
+            error:"Wrong query params!"
+        })
+    }
+    let page = Math.max(0, query.page);
+    let search = query.keywords ? {$text: {$search: query.keywords}} : {};
+    Vacancy.find(search, '-__v -updatedAt')
+        .skip(page * _pageSize)
+        .limit(_pageSize)
+        .sort({createdAt:-1})
+        .exec(function(err, docs) {
+            if(err){
+                next(err);
+            }
+            Vacancy.count(search, function(err, count){
+                if(err){
+                    next(err);
+                }
+                res.json({docs, count});
+            })
+        });
+});
 
 function setUserInfo(request) {
     return {

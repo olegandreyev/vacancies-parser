@@ -108,7 +108,8 @@ exports.confirmEmail = function(req, res, next){
         if(err){
             res.redirect("/login?emailConfirmStatus=false")
         }
-        User.findOneAndUpdate({emailConfirmationToken:token},{ isEmailVerified: true }, function(err, result) {
+        User.findOneAndUpdate({emailConfirmationToken:token},{ isEmailVerified: true, emailConfirmationToken:null },
+            function(err, result) {
             if(err){
                 next(err);
             }

@@ -31,6 +31,8 @@ const VacancySchema = new Schema({
     timestamps:true
 });
 
+VacancySchema.index({'$**': 'text'});
+
 VacancySchema.statics.removeOld = function(){
     return this.remove({
         "meta.createdAt":{
