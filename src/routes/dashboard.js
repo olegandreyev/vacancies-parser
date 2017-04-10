@@ -3,12 +3,15 @@
  */
 
 import React from 'react';
+import { SearchVacancies } from 'components'
 
 export default class Dashboard extends React.Component {
     render(){
         return (
-            <div>
-                Main Dashboard
+            <div className="dashboard">
+                <div className="header">
+                    <SearchVacancies>/</SearchVacancies>
+                </div>
             </div>
         )
     }

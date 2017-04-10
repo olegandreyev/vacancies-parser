@@ -40,6 +40,21 @@ router.get("/vacancies",(req, res, next) => {
         });
 });
 
+router.get("/vacancies/autocomplete",(req, res, next) => {
+    const urlObj = url.parse(req.url, true);
+    Vacancy.find({
+        title:{
+            $regex:urlObj.query.text,
+            $options:"is"
+        }
+    },'title', function(err, results){
+        if(err){
+            next(err);
+        }
+        res.json(results.map(v => v.title));
+    });
+});
+
 function setUserInfo(request) {
     return {
         _id: request._id,
