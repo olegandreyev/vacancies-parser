@@ -28,11 +28,14 @@ export default class VacancyAutoComplete extends React.Component {
     handleUpdateInput = searchText => {
         searchTitles(searchText).then(response => {
             this.setState({jobTitles:response.data})
-        })
+        });
+        this.props.onChange(searchText);
     };
     render(){
+        const {value} = this.props;
         return (
                 <AutoComplete
+                    searchText={value}
                     hintText="Junior Java Developer"
                     filter={() => true}
                     maxSearchResults={10}

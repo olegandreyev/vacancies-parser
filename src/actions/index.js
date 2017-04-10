@@ -3,3 +3,4 @@
  */
 
 export { authSuccess, setUser } from './auth'
+export { fetchVacancies } from './vacancies';

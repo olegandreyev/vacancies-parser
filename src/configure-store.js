@@ -9,9 +9,9 @@ import {routerReducer, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 import { authMiddleware } from 'middlewares'
+import promiseMiddleware from 'redux-promise-middleware'
 
 export default function() {
-
     const composeEnhancers =
         typeof window === 'object' &&
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
@@ -28,7 +28,9 @@ export default function() {
             form: formReducer,
         }),
         composeEnhancers(
-            applyMiddleware(thunk, rrMiddleware, authMiddleware)
+            applyMiddleware(thunk, rrMiddleware, authMiddleware, promiseMiddleware({
+                promiseTypeSuffixes:["PENDING","SUCCESS","ERROR"]
+            }))
         )
     );
 }

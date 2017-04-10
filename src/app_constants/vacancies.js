@@ -1,0 +1,7 @@
+/**
+ * Created by Olejka on 10.04.2017.
+ */
+
+export const  SEARCH_VACANCY = "SEARCH_VACANCY";
+export const  SEARCH_VACANCY_SUCCESS = "SEARCH_VACANCY_SUCCESS";
+export const  SEARCH_VACANCY_ERROR = "SEARCH_VACANCY_ERROR";
