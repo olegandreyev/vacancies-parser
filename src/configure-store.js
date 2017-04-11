@@ -8,7 +8,7 @@ import { browserHistory } from 'react-router'
 import {routerReducer, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
-import { authMiddleware } from 'middlewares'
+import { authMiddleware, searchMiddleware } from 'middlewares'
 import promiseMiddleware from 'redux-promise-middleware'
 
 export default function() {
@@ -30,7 +30,7 @@ export default function() {
         composeEnhancers(
             applyMiddleware(thunk, rrMiddleware, authMiddleware, promiseMiddleware({
                 promiseTypeSuffixes:["PENDING","SUCCESS","ERROR"]
-            }))
+            }), searchMiddleware)
         )
     );
 }

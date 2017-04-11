@@ -5,4 +5,6 @@
 export App from './app'
 export Login from './login'
 export Register from './register'
-export Dashboard from './dashboard'
+export Main from './main'
+export AnalyzeDashboard from './analyze-dashboard'
+export Vacancies from './vacancies'

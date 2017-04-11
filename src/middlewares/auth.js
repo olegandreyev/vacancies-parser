@@ -4,7 +4,7 @@ import { AUTH_SUCCESS } from 'app_constants';
 import { push } from 'react-router-redux';
 import { client }  from 'helpers'
 
-export const authMiddleware = store => next => action => {
+const authMiddleware = store => next => action => {
     if(action.type === AUTH_SUCCESS){
         let token = action.payload.token;
         localStorage.setItem("authToken", token);
@@ -15,3 +15,5 @@ export const authMiddleware = store => next => action => {
         next(action);
     }
 };
+
+export default authMiddleware

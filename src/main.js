@@ -16,7 +16,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 
 import configureStore from './configure-store'
 import configureClient from './configure-client';
-import { App, Login, Register, Dashboard } from 'routes';
+import { App, Login, Register, Main, Vacancies, AnalyzeDashboard } from 'routes';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -52,7 +52,10 @@ ReactDOM.render(
                 <Route path="login" component={Login}/>
                 <Route path="register" component={Register}>/</Route>
                 <Route onEnter={checkAuth}>
-                    <Route path="dashboard" component={Dashboard}/>
+                    <Route path="dashboard" component={Main}>
+                        <IndexRoute component={AnalyzeDashboard}/>
+                        <Route path="search" component={Vacancies}/>
+                    </Route>
                 </Route>
             </Route>
         </Router>
