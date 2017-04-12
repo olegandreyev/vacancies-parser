@@ -13,7 +13,9 @@ const searchMiddleware = store => next => action => {
         let changedUrl = `/dashboard/search?keywords=${keywords}&page=${page}`;
         let routeAction = route === '/dashboard/search' ? replace(changedUrl) : push(changedUrl);
         store.dispatch(routeAction);
-        store.dispatch(fetchVacancies(keywords, page))
+        if(route === '/dashboard/search') {
+            store.dispatch(fetchVacancies(keywords, page))
+        }
     } else{
         next(action);
     }
