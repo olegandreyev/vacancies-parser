@@ -4,6 +4,8 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 
 @connect(({vacancies}) => {
     return {
@@ -17,6 +19,8 @@ export default class Vacancies extends React.Component {
         return (
             <div>
                 Vacancies
+
+                <Pagination current={2} total={25} />
             </div>
         )
     }
