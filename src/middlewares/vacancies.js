@@ -12,6 +12,7 @@ const searchNavigatorMiddleware = store => next => action => {
         store.dispatch(push(`/dashboard/search?keywords=${keywords}&page=${page}`));
     } else if(action.type === LOCATION_CHANGE && action.payload.pathname === "/dashboard/search"){
         const { keywords, page } = action.payload.query;
+        next(action);
         store.dispatch(change("searchVacancies", "keywords", keywords));
         store.dispatch(fetchVacancies(keywords, page));
     } else{
