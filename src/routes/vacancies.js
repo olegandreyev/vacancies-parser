@@ -16,13 +16,19 @@ import { searchVacancies } from 'actions'
     searchVacancies
 })
 export default class Vacancies extends React.Component {
-    render(){
+    componentDidMount() {
+        let {keywords, page} = this.props.location.query;
+        keywords = keywords || '';
+        page = Number.isInteger(page) ? +page : 0;
+        this.props.searchVacancies(keywords, page);
+    }
+    render() {
         const vacancies = this.props.vacancies;
-        console.log(vacancies,'vacancies')
+        console.log(vacancies, 'vacancies')
         return (
             <div>
                 Vacancies
-                <Pagination locale={{}} current={2} total={25} />
+                <Pagination locale={{}} current={2} total={25}/>
             </div>
         )
     }
