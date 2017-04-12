@@ -5,7 +5,7 @@ import { push, LOCATION_CHANGE } from 'react-router-redux';
 import { fetchVacancies } from 'actions'
 import { change } from 'redux-form'
 
-const searchMiddleware = store => next => action => {
+const searchNavigatorMiddleware = store => next => action => {
     if(action.type === SEARCH_VACANCIES){
         const { keywords, page } = action.payload;
         next(action);
@@ -19,4 +19,4 @@ const searchMiddleware = store => next => action => {
     }
 };
 
-export default searchMiddleware;
+export default searchNavigatorMiddleware;
