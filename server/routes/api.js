@@ -20,6 +20,7 @@ router.get("/vacancies",(req, res, next) => {
         res.status(400).send({
             error:"Wrong query params!"
         })
+        return;
     }
     let page = Math.max(0, query.page);
     let search = query.keywords ? {$text: {$search: query.keywords}} : {};
@@ -30,10 +31,12 @@ router.get("/vacancies",(req, res, next) => {
         .exec(function(err, docs) {
             if(err){
                 next(err);
+                return;
             }
             Vacancy.count(search, function(err, count){
                 if(err){
                     next(err);
+                    return
                 }
                 res.json({docs, count});
             })

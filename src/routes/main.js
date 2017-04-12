@@ -14,10 +14,14 @@ export default class Main extends React.Component {
     searchVacancies = values => {
        return this.props.searchVacancies(values.keywords, 0);
     };
+    componentWillReceiveProps(){
+        console.log(this.props,'REFRESH')
+    }
     render(){
         const { keywords, page } = this.props.location.query;
         const initialValues = {
-            keywords
+            keywords:keywords || '',
+            page:page || 0
         };
         return (
             <div className="dashboard">
