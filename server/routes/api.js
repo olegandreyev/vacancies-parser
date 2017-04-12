@@ -50,9 +50,10 @@ router.get("/vacancies/autocomplete",(req, res, next) => {
             $regex:urlObj.query.text,
             $options:"is"
         }
-    },'title', function(err, results){
+    },'title').limit(10).exec(function(err, results){
         if(err){
             next(err);
+            return;
         }
         res.json(results.map(v => v.title));
     });
