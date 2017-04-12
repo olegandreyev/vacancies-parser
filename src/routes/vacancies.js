@@ -8,19 +8,19 @@ import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import { searchVacancies } from 'actions'
 
-@connect(({vacancies}) => {
+@connect(({vacancies}, ownProps) => {
     return {
-        vacancies
+        vacancies:vacancies.vacancies,
+        isLoading:vacancies.isFetching,
+        query:ownProps.location.query
     }
 }, {
     searchVacancies
 })
 export default class Vacancies extends React.Component {
     componentDidMount() {
-        let {keywords, page} = this.props.location.query;
-        keywords = keywords || '';
-        page = Number.isInteger(+page) ? +page : 0;
-        this.props.searchVacancies(keywords, page);
+        let {keywords, page} = this.props.query;
+        this.props.searchVacancies(keywords, +page);
     }
     render() {
         const vacancies = this.props.vacancies;
