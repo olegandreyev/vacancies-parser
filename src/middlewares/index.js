@@ -3,4 +3,4 @@
  */
 
 export authMiddleware from './auth'
-export searchNavigatorMiddleware from './vacancies'
+export searchMiddleware from './vacancies'

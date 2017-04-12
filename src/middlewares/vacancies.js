@@ -1,23 +1,21 @@
 
 
 import { AUTH_SUCCESS, SEARCH_VACANCIES } from 'app_constants';
-import { push, LOCATION_CHANGE } from 'react-router-redux';
+import { replace, push } from 'react-router-redux';
 import { fetchVacancies } from 'actions'
-import { change } from 'redux-form'
 
-const searchNavigatorMiddleware = store => next => action => {
+const searchMiddleware = store => next => action => {
     if(action.type === SEARCH_VACANCIES){
         const { keywords, page } = action.payload;
         next(action);
-        store.dispatch(push(`/dashboard/search?keywords=${keywords}&page=${page}`));
-    } else if(action.type === LOCATION_CHANGE && action.payload.pathname === "/dashboard/search"){
-        const { keywords, page } = action.payload.query;
-        next(action);
-        store.dispatch(change("searchVacancies", "keywords", keywords));
-        store.dispatch(fetchVacancies(keywords, page));
+        let route = location.pathname;
+        let changedUrl = `/dashboard/search?keywords=${keywords}&page=${page}`;
+        let routeAction = route === '/dashboard' ? push(changedUrl) : replace(changedUrl);
+        store.dispatch(routeAction);
+        store.dispatch(fetchVacancies(keywords, page))
     } else{
         next(action);
     }
 };
 
-export default searchNavigatorMiddleware;
+export default searchMiddleware;

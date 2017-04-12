@@ -14,8 +14,13 @@ export default class Main extends React.Component {
     searchVacancies = values => {
        return this.props.searchVacancies(values.keywords, 0);
     };
-    componentWillReceiveProps(){
-        console.log(this.props,'REFRESH')
+    componentDidMount(){
+        if(this.props.location.pathname === "/dashboard/search"){
+            let { keywords, page } = this.props.location.query;
+            keywords = keywords || '';
+            page = Number.isInteger(page) ? +page : 0;
+            this.props.searchVacancies(keywords, page);
+        }
     }
     render(){
         const { keywords, page } = this.props.location.query;
