@@ -20,7 +20,7 @@ export default class Vacancies extends React.Component {
             <div>
                 Vacancies
 
-                <Pagination current={2} total={25} />
+                <Pagination locale={{}} current={2} total={25} />
             </div>
         )
     }
