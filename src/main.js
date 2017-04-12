@@ -18,9 +18,10 @@ import configureStore from './configure-store'
 import configureClient from './configure-client';
 import { App, Login, Register, Main, Vacancies, AnalyzeDashboard } from 'routes';
 
+
 const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
 configureClient(client, store);
+const history = syncHistoryWithStore(browserHistory, store);
 
 const checkAuth = (nextState, replace, callback) => {
     const token = localStorage.getItem('authToken');
