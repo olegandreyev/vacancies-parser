@@ -1,7 +1,83 @@
 
+@muteColor:darken(#ccc,20%);
+
 .dashboard{
   padding:20px;
+  width: 1000px;
+  margin: auto;
 }
 .content-wrapper {
   margin-top: 20px;
+}
+
+.vacancy-list-wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+.white-block{
+  background: white;
+  width: 25%;
+  height: 400px;
+}
+.vacancy-list{
+  width: 73%;
+  .v-item {
+    position: relative;
+    margin-bottom: 10px;
+    width: 100%;
+    .v-body{
+      width: 80%;
+    }
+    .v-body > div:not(:last-child) {
+      margin-bottom: 5px;
+    }
+    .v-title {
+      font-size: 20px;
+      color: lighten(blue,20%);
+      font-weight: 500;
+    }
+    .v-ishot {
+      vertical-align: top;
+      width: 21px;
+      height: 30px;
+      position: relative;
+      top: -7px;
+      left: 9px;
+    }
+    .company-name-block {
+      a{
+        color: @muteColor;
+        font-size: 16px;
+      }
+    }
+    .vacancy-description-block{
+      margin-top:20px;
+      color:darken(#ccc,20%);
+    }
+
+    .resource-logo-link{
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .v-logo-link{
+      width: 60px;
+      height: 20px;
+      &.rabota-ua{
+        background: url(../assets/rabota-logo.jpg) no-repeat center center;
+        background-size: contain;
+      }
+      &.work-ua{
+        background: url(../assets/work-logo.png) no-repeat center center;
+        background-size: contain;
+      }
+      &.dou-ua{
+        background: url(../assets/dou-logo.png) no-repeat center center;
+        background-size: contain;
+      }
+    }
+
+
+  }
 }

@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import { searchVacancies } from 'actions'
+import { VacancyList } from 'components'
 
 @connect(({vacancies}, ownProps) => {
     return {
@@ -27,7 +28,10 @@ export default class Vacancies extends React.Component {
         console.log(vacancies, 'vacancies')
         return (
             <div>
-                Vacancies
+                <div className="vacancy-list-wrapper">
+                    <VacancyList vacancies={vacancies}/>
+                    <div className="white-block"></div>
+                </div>
                 <Pagination locale={{}} current={2} total={25}/>
             </div>
         )

@@ -27,7 +27,7 @@ router.get("/vacancies",(req, res, next) => {
     Vacancy.find(search, '-__v -updatedAt')
         .skip(page * _pageSize)
         .limit(_pageSize)
-        .sort({createdAt:-1})
+        .sort({isHot:-1,createdAt:-1})
         .exec(function(err, docs) {
             if(err){
                 next(err);

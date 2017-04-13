@@ -23,6 +23,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path:path.join(__dirname,'server','public'),
+        publicPath:"/"
     },
     devtool:'#source-map',
     resolve: {
@@ -42,11 +43,11 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
-                loader: 'file'
+                loader: 'file-loader?name=images/[name].[ext]'
             },
             {
                 test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
-                loader: 'file'
+                loader: 'file-loader'
             },
             {
                 test: /\.js$/,

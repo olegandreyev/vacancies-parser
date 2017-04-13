@@ -41,7 +41,7 @@ export default class VacancyAutoComplete extends React.Component {
                     maxSearchResults={10}
                     dataSource={this.state.jobTitles}
                     onUpdateInput={this.handleUpdateInput}
-                    style={{width:"70%"}}
+                    style={{width:"89%"}}
                     fullWidth={true}
                 />
         )
