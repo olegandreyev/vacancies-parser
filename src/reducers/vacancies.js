@@ -5,7 +5,7 @@
 const initialState = {
     vacancies:[],
     isFetching:false,
-    curPage:0,
+    curPage:1,
     keywords:'',
     count:0
 };

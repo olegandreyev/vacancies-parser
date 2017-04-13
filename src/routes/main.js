@@ -12,13 +12,13 @@ import { searchVacancies } from 'actions'
 })
 export default class Main extends React.Component {
     searchVacancies = values => {
-       return this.props.searchVacancies(values.keywords, 0);
+       return this.props.searchVacancies(values.keywords, 1);
     };
     render(){
         const { keywords, page } = this.props.location.query;
         const initialValues = {
             keywords:keywords || '',
-            page:page || 0
+            page:page || 1
         };
         return (
             <div className="dashboard">

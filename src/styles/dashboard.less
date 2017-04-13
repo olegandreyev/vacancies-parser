@@ -42,7 +42,7 @@
       width: 21px;
       height: 30px;
       position: relative;
-      top: -7px;
+      top: -3px;
       left: 9px;
     }
     .company-name-block {
@@ -50,6 +50,10 @@
         color: @muteColor;
         font-size: 16px;
       }
+    }
+    .additional-info-block > span{
+      display: inline-block;
+      margin-right: 10px;
     }
     .vacancy-description-block{
       margin-top:20px;
@@ -62,22 +66,30 @@
       top: 10px;
     }
     .v-logo-link{
-      width: 60px;
-      height: 20px;
+      width: 85px;
+      height:30px;
       &.rabota-ua{
         background: url(../assets/rabota-logo.jpg) no-repeat center center;
-        background-size: contain;
+        background-size: cover;
+        width: 105px;
+        height: 36px;
       }
       &.work-ua{
         background: url(../assets/work-logo.png) no-repeat center center;
-        background-size: contain;
+        background-size: cover;
       }
       &.dou-ua{
         background: url(../assets/dou-logo.png) no-repeat center center;
         background-size: contain;
+        width: 50px;
+        height: 20px;
       }
     }
 
 
   }
+}
+
+.rc-pagination-next, .rc-pagination-prev{
+  background: white;
 }

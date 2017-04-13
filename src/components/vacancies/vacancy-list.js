@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {Card, CardText, FontIcon} from 'material-ui'
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 
 const VacancyItem = ({vacancy}) => (
@@ -12,12 +12,17 @@ const VacancyItem = ({vacancy}) => (
         <CardText>
             <div className="v-body">
                 <div className="vacancy-title-block">
-                    <span className="v-title"><Link to="/">{vacancy.title}</Link></span>
-                    {vacancy.isHot
-                        ? <img className="v-ishot"
-                               src={require('../../assets/hot-icon.png')}
-                               alt="Hot Vacancy"/>
-                        : null }
+                    <span className="v-title">
+                        <Link to="/">
+                        {vacancy.title}
+                            {vacancy.isHot
+                                ? <img className="v-ishot"
+                                       src={require('../../assets/hot-icon.png')}
+                                       alt="Hot Vacancy"/>
+                                : null }
+                        </Link>
+                    </span>
+
                 </div>
                 <div className="company-name-block">
                     <a href={vacancy.companyLink} target="_blank">{vacancy.companyName}</a>
@@ -25,9 +30,10 @@ const VacancyItem = ({vacancy}) => (
                 <div className="additional-info-block">
                     {vacancy.salary
                         ? <span className="v-salary">{vacancy.salary}</span>
-                        :null}
-                      <span className="v-location">
-                          <FontIcon className="fa fa-map-marker" style={{fontSize:"18px", marginRight:5}} color="black"/>{vacancy.region}
+                        : null}
+                    <span className="v-location">
+                          <FontIcon className="fa fa-map-marker" style={{fontSize: "18px", marginRight: 5}}
+                                    color="black"/>{vacancy.region}
                           </span>
                 </div>
                 <div className="vacancy-description-block">

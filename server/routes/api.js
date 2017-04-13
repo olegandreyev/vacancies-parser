@@ -22,7 +22,7 @@ router.get("/vacancies",(req, res, next) => {
         })
         return;
     }
-    let page = Math.max(0, query.page);
+    let page = Math.max(1, +query.page) - 1;
     let search = query.keywords ? {$text: {$search: query.keywords}} : {};
     Vacancy.find(search, '-__v -updatedAt')
         .skip(page * _pageSize)
