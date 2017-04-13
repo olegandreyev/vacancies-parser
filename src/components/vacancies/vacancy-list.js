@@ -5,6 +5,8 @@
 import React from 'react';
 import {Card, CardText, FontIcon} from 'material-ui'
 import {Link} from 'react-router'
+import LinearProgress from 'material-ui/LinearProgress';
+
 
 
 const VacancyItem = ({vacancy}) => (
@@ -15,11 +17,9 @@ const VacancyItem = ({vacancy}) => (
                     <span className="v-title">
                         <Link to="/">
                         {vacancy.title}
-                            {vacancy.isHot
-                                ? <img className="v-ishot"
-                                       src={require('../../assets/hot-icon.png')}
-                                       alt="Hot Vacancy"/>
-                                : null }
+                            {vacancy.isHot && <img className="v-ishot"
+                                                   src={require('../../assets/hot-icon.png')}
+                                                   alt="Hot Vacancy"/>}
                         </Link>
                     </span>
 
@@ -28,9 +28,7 @@ const VacancyItem = ({vacancy}) => (
                     <a href={vacancy.companyLink} target="_blank">{vacancy.companyName}</a>
                 </div>
                 <div className="additional-info-block">
-                    {vacancy.salary
-                        ? <span className="v-salary">{vacancy.salary}</span>
-                        : null}
+                    {vacancy.salary && <span className="v-salary">{vacancy.salary}</span>}
                     <span className="v-location">
                           <FontIcon className="fa fa-map-marker" style={{fontSize: "18px", marginRight: 5}}
                                     color="black"/>{vacancy.region}
@@ -52,10 +50,12 @@ const VacancyItem = ({vacancy}) => (
 
 export default class VacancyList extends React.Component {
     render() {
-        const {vacancies} = this.props;
+        const {vacancies, loading} = this.props;
         return (
             <div className="vacancy-list">
+                {loading && <LinearProgress mode="indeterminate"/>}
                 {vacancies.map(vacancy => <VacancyItem vacancy={vacancy} key={vacancy._id}/>)}
+                {loading && <LinearProgress mode="indeterminate"/>}
             </div>
         )
     }

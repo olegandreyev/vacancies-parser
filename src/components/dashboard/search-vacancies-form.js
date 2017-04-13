@@ -16,7 +16,7 @@ const renderAutoComplete = ({input}) =>(
 })
 export default class SearchVacanciesForm extends React.Component {
     render() {
-        const { handleSubmit, fields:{keywords} } = this.props;
+        const { handleSubmit } = this.props;
         return (
             <div className="vacancy-from-wrapper">
                 <Card>

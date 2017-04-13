@@ -29,11 +29,11 @@ export default class Vacancies extends React.Component {
         this.props.searchVacancies(keywords, curPage);
     };
     render() {
-        let {vacancies, count, query:{page}} = this.props;
+        let {vacancies, count, query:{page}, isLoading} = this.props;
         return (
             <div>
                 <div className="vacancy-list-wrapper">
-                    <VacancyList vacancies={vacancies}/>
+                    <VacancyList loading={isLoading} vacancies={vacancies}/>
                     <div className="white-block"></div>
                 </div>
                 <Pagination locale={{}}
