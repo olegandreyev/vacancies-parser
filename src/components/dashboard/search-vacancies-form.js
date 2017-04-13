@@ -12,8 +12,7 @@ const renderAutoComplete = ({input}) =>(
 );
 
 @reduxForm({
-    form: "searchVacancies",
-    fields:["keywords"]
+    form: "searchVacancies"
 })
 export default class SearchVacanciesForm extends React.Component {
     render() {
