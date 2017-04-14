@@ -22,12 +22,22 @@ import { VacancyList, VacancyFilter } from 'components'
 })
 export default class Vacancies extends React.Component {
     componentDidMount() {
-        let {keywords, page} = this.props.query;
-        this.props.searchVacancies(keywords, +page);
+        let {keywords, page, isHot, region, resource} = this.props.query;
+        //synchronize query params and store
+        this.props.searchVacancies({
+            keywords,
+            page: Number.isInteger(+page) ? +page : 1,
+            isHot: isHot === 'true',
+            region:region || null,
+            resource: resource || null
+        });
     }
     handleChangePage = curPage => {
         let {keywords} = this.props.query;
-        this.props.searchVacancies(keywords, curPage);
+        this.props.searchVacancies({
+            keywords,
+            page:curPage
+        });
     };
     render() {
         let {vacancies, count, query:{page}, isLoading} = this.props;

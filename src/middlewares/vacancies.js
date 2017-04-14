@@ -6,19 +6,41 @@ import { fetchVacancies } from 'actions'
 
 const searchMiddleware = store => next => action => {
     if(action.type === SEARCH_VACANCIES){
-        const { keywords, page } = action.payload;
-        next(action);
+
+        const vacanciesSearch = store.getState().vacancies.search;
+        //add missing values to search payload
+        let searchObj = {
+            ...vacanciesSearch,
+            ...action.payload
+        };
+        console.log(searchObj,'search')
+        let queryString = getQueryStringByObject(searchObj);
+
         //requires for change query params in URL string
         let route = location.pathname;
-        let changedUrl = `/dashboard/search?keywords=${keywords}&page=${page}`;
+        let changedUrl = `/dashboard/search?${queryString}`;
         let routeAction = route === '/dashboard/search' ? replace(changedUrl) : push(changedUrl);
+
+        next(action);
         store.dispatch(routeAction);
         if(route === '/dashboard/search') {
-            store.dispatch(fetchVacancies(keywords, page))
+            store.dispatch(fetchVacancies(searchObj))
         }
     } else{
         next(action);
     }
 };
+
+function getQueryStringByObject(searchObj){
+   return Object.keys(searchObj).reduce((queryStr, param, i, arr) => {
+       if(searchObj[param] === null) return queryStr;
+       if(param === 'isHot' && !searchObj[param]) return queryStr;
+       if(i !== 0){
+           queryStr+="&"
+       }
+       queryStr+=`${param}=${searchObj[param]}`;
+       return queryStr;
+   },'')
+}
 
 export default searchMiddleware;

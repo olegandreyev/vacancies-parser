@@ -4,19 +4,50 @@
 
 import React from 'react';
 import {Card, CardText, Toggle, SelectField, MenuItem } from 'material-ui'
+import {searchVacancies} from 'actions'
+import { connect } from 'react-redux';
 
+@connect(({vacancies:{search}}) => ({
+    isHot:search.isHot,
+    region: search.region,
+    resource: search.resource
+}), {
+    searchVacancies
+})
 export default class VacancyFilter extends React.Component {
+    handleHotToggler = (e, isChecked) => {
+        this.props.searchVacancies({
+            isHot:isChecked,
+            page:1
+        })
+    };
+    handleRegionSelect = (e, key, val) => {
+        this.props.searchVacancies({
+            region:val,
+            page:1
+        })
+    };
+    handleResourceSelect = (e, key, val) => {
+        this.props.searchVacancies({
+            resource:val,
+            page:1
+        })
+    };
     render(){
+        const {isHot, resource, region} = this.props;
         return (
             <Card className="white-block">
                 <CardText>
                     <Toggle
                         label="Show only hot vacancies"
+                        onToggle={this.handleHotToggler}
+                        toggled={isHot}
                     />
                     <br/>
                     <SelectField
                         floatingLabelText="Resource"
-                        value={null}
+                        value={resource}
+                        onChange={this.handleResourceSelect}
                         fullWidth={true}
                     >
                         <MenuItem value={null} primaryText="" />
@@ -27,7 +58,8 @@ export default class VacancyFilter extends React.Component {
                     <br/>
                     <SelectField
                         floatingLabelText="Region"
-                        value={null}
+                        value={region}
+                        onChange={this.handleRegionSelect}
                         fullWidth={true}
                     >
                         <MenuItem value={null} primaryText="" />

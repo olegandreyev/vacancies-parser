@@ -31,6 +31,9 @@ const VacancySchema = new Schema({
     timestamps:true
 });
 
+const _pageSize = 15;
+
+
 VacancySchema.index({'$**': 'text'});
 
 VacancySchema.statics.removeOld = function(){
@@ -39,6 +42,56 @@ VacancySchema.statics.removeOld = function(){
             $lt:moment().subtract(1,'months').toDate()
         }
     })
+};
+
+const createMongoSearch = searchObj => {
+    let result = {};
+    let {region, keywords, resource, isHot} = searchObj;
+    if(keywords){
+        result.$text = {
+            $search: keywords
+        }
+    }
+    if(region){
+        result.region = {
+            $regex:region,
+            $options:"is"
+        }
+    }
+    if(resource){
+        result.resource = resource;
+    }
+    if(isHot){
+        result.isHot = isHot;
+    }
+    return result;
+};
+
+VacancySchema.statics.searchVacancies = function(searchObj){
+    let { page } = searchObj;
+    page = Math.max(1, page) - 1;
+    const self = this;
+    const mongooseSearch = createMongoSearch(searchObj);
+    return new Promise((res, rej) => {
+        return self.find( mongooseSearch , '-__v -updatedAt')
+            .skip(page * _pageSize)
+            .limit(_pageSize)
+            .sort({isHot:-1,createdAt:-1})
+            .exec(function(err, docs) {
+                if(err){
+                    rej(err);
+                    return;
+                }
+                self.count(mongooseSearch, function(err, count){
+                    if(err){
+                        rej(err);
+                        return
+                    }
+                    res({docs, count});
+                })
+            });
+    })
+
 };
 
 module.exports = mongoose.model("Vacancy", VacancySchema);
