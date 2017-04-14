@@ -3,5 +3,6 @@
  */
 
 module.exports = {
-    Vacancy: require('./vacancy')
-}
+    Vacancy: require('./vacancy'),
+    User: require("./user")
+};

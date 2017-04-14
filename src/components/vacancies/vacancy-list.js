@@ -7,8 +7,6 @@ import {Card, CardText, FontIcon} from 'material-ui'
 import {Link} from 'react-router'
 import LinearProgress from 'material-ui/LinearProgress';
 
-
-
 const VacancyItem = ({vacancy}) => (
     <Card className="v-item">
         <CardText>
@@ -31,7 +29,7 @@ const VacancyItem = ({vacancy}) => (
                     {vacancy.salary && <span className="v-salary">{vacancy.salary}</span>}
                     <span className="v-location">
                           <FontIcon className="fa fa-map-marker" style={{fontSize: "18px", marginRight: 5}}
-                                    color="black"/>{vacancy.region}
+                                    color="black"/>{vacancy.region.join(", ")}
                           </span>
                 </div>
                 <div className="vacancy-description-block">

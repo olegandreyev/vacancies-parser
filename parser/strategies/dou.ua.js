@@ -73,7 +73,8 @@ class DouUAStrategy {
                 const $row = $(row);
                 vacancy._id = $row.find('a.vt').attr('href').replace('?from=list_hot',"");
                 if(!vacancy._id)return;
-                vacancy.region =  parseText( $row.find('span.cities').text().replace("?","") );
+                let regionStr = parseText( $row.find('span.cities').text().replace("?","") );
+                vacancy.region = !regionStr ? ["Другой"] : regionStr.split(", ");
                 vacancy.title = parseText( $row.find('a.vt').text() );
                 vacancy.companyName = parseText( $row.find('a.company').text()) ;
                 vacancy.shortDescr = parseText( $row.find('.sh-info').text() ) || null;

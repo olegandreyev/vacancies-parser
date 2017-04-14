@@ -25,7 +25,7 @@ export default class Vacancies extends React.Component {
         let {keywords, page, isHot, region, resource} = this.props.query;
         //synchronize query params and store
         this.props.searchVacancies({
-            keywords,
+            keywords:keywords || '',
             page: Number.isInteger(+page) ? +page : 1,
             isHot: isHot === 'true',
             region:region || null,

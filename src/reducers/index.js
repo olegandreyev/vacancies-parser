@@ -4,3 +4,4 @@
 
 export auth from './auth'
 export vacancies from './vacancies'
+export vacancyFilters from './vacancy-filters'

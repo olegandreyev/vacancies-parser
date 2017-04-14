@@ -46,7 +46,7 @@ class WorkUAStrategy {
                 vacancy.companyName = parseText( $row.find('div:not(.logo-img)').find('span:first-child').text().replace("·",'') );
                 vacancy.shortDescr = parseText( $row.find('p').text() );
                 vacancy.tags = [];
-                vacancy.region = parseText( $row.find('div:not(.logo-img)').text().split("·")[1] );
+                vacancy.region = parseText( $row.find('div:not(.logo-img)').text().split("·")[1] ).split(", ");
                 vacancies.push(vacancy)
             });
             return vacancies;

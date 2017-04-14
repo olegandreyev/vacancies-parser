@@ -17,9 +17,19 @@ router.post("/vacancies",(req, res, next) => {
     console.log(query);
     Vacancy.searchVacancies(query).then(({docs, count}) => {
         res.json({docs, count})
-    }).catch(err => {
-        next(err)
-    });
+    }).catch(next);
+});
+
+router.get("/regions", (req, res, next) => {
+    Vacancy.getRegions().then(docs => {
+        res.json(docs)
+    }).catch(next)
+});
+
+router.get("/resources", (req, res, next) => {
+    Vacancy.getResources().then(docs => {
+        res.json(docs)
+    }).catch(next)
 });
 
 router.get("/vacancies/autocomplete",(req, res, next) => {

@@ -12,10 +12,10 @@ const VacancySchema = new Schema({
     link:String,
     isHot:Boolean,
     salary:String,
-    region:String,
+    region:Array,
     shortDescr:String,
     fullDescr:String,
-    logo:String,
+    companyLogo:String,
     tags:Array,
     resource:{
         required:true,
@@ -54,8 +54,7 @@ const createMongoSearch = searchObj => {
     }
     if(region){
         result.region = {
-            $regex:region,
-            $options:"is"
+            $in:[region]
         }
     }
     if(resource){
@@ -65,6 +64,35 @@ const createMongoSearch = searchObj => {
         result.isHot = isHot;
     }
     return result;
+};
+
+VacancySchema.statics.getRegions = function(){
+    return new Promise((res, rej) => {
+        this.aggregate([
+            {$unwind: "$region" },
+            {$group: { _id: "$region"}},
+        ], function(err, docs){
+            if(err){
+                rej(err);
+                return;
+            }
+            res(docs);
+        });
+    })
+};
+
+VacancySchema.statics.getResources = function(){
+    return new Promise((res, rej) => {
+        this.aggregate([
+            {$group: { _id: "$resource" }},
+        ], function(err, docs){
+            if(err){
+                rej(err);
+                return;
+            }
+            res(docs);
+        });
+    })
 };
 
 VacancySchema.statics.searchVacancies = function(searchObj){

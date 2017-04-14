@@ -3,4 +3,4 @@
  */
 
 export { authSuccess, setUser } from './auth'
-export { fetchVacancies, searchVacancies } from './vacancies';
+export { fetchVacancies, searchVacancies, fetchRegionList, fetchResourceList } from './vacancies';

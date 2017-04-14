@@ -7,7 +7,7 @@ import { fetchVacancies } from 'actions'
 const searchMiddleware = store => next => action => {
     if(action.type === SEARCH_VACANCIES){
 
-        const vacanciesSearch = store.getState().vacancies.search;
+        const vacanciesSearch = store.getState().vacancyFilters.search;
         //add missing values to search payload
         let searchObj = {
             ...vacanciesSearch,
@@ -33,7 +33,7 @@ const searchMiddleware = store => next => action => {
 
 function getQueryStringByObject(searchObj){
    return Object.keys(searchObj).reduce((queryStr, param, i, arr) => {
-       if(searchObj[param] === null) return queryStr;
+       if(searchObj[param] === null || searchObj[param] === '') return queryStr;
        if(param === 'isHot' && !searchObj[param]) return queryStr;
        if(i !== 0){
            queryStr+="&"

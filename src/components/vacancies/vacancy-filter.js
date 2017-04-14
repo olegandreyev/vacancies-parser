@@ -4,15 +4,23 @@
 
 import React from 'react';
 import {Card, CardText, Toggle, SelectField, MenuItem } from 'material-ui'
-import {searchVacancies} from 'actions'
+import {searchVacancies, fetchResourceList, fetchRegionList} from 'actions'
 import { connect } from 'react-redux';
 
-@connect(({vacancies:{search}}) => ({
-    isHot:search.isHot,
-    region: search.region,
-    resource: search.resource
+@connect(({vacancyFilters}) => ({
+    isHot:vacancyFilters.search.isHot,
+    region: vacancyFilters.search.region,
+    resource: vacancyFilters.search.resource,
+
+    regions:vacancyFilters.regions,
+    resources:vacancyFilters.resources,
+    isLoadResources:vacancyFilters.isResourcesFetching,
+    isLoadRegions: vacancyFilters.isRegionsFetching
+
 }), {
-    searchVacancies
+    searchVacancies,
+    fetchResourceList,
+    fetchRegionList
 })
 export default class VacancyFilter extends React.Component {
     handleHotToggler = (e, isChecked) => {
@@ -33,8 +41,12 @@ export default class VacancyFilter extends React.Component {
             page:1
         })
     };
+    componentDidMount(){
+        this.props.fetchRegionList();
+        this.props.fetchResourceList();
+    }
     render(){
-        const {isHot, resource, region} = this.props;
+        const {isHot, resource, region, regions, resources, isLoadResources, isLoadRegions} = this.props;
         return (
             <Card className="white-block">
                 <CardText>
@@ -47,25 +59,23 @@ export default class VacancyFilter extends React.Component {
                     <SelectField
                         floatingLabelText="Resource"
                         value={resource}
+                        disabled={isLoadResources}
                         onChange={this.handleResourceSelect}
                         fullWidth={true}
                     >
                         <MenuItem value={null} primaryText="" />
-                        <MenuItem value={"dou-ua"} primaryText="dou.ua" />
-                        <MenuItem value={"rabota-ua"} primaryText="rabota.ua" />
-                        <MenuItem value={"work-ua"} primaryText="work.ua" />
+                        {resources.map(res => <MenuItem key={res._id} primaryText={res._id} value={res._id} />)}
                     </SelectField>
                     <br/>
                     <SelectField
                         floatingLabelText="Region"
                         value={region}
+                        disabled={isLoadRegions}
                         onChange={this.handleRegionSelect}
                         fullWidth={true}
                     >
                         <MenuItem value={null} primaryText="" />
-                        <MenuItem value={"Киев"} primaryText="Киев" />
-                        <MenuItem value={"Одесса"} primaryText="Одесса" />
-                        <MenuItem value={"Харьков"} primaryText="Харьков" />
+                        {regions.map(res => <MenuItem key={res._id} primaryText={res._id} value={res._id} />)}
                     </SelectField>
                 </CardText>
             </Card>
