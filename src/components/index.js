@@ -6,4 +6,5 @@ export LoginForm from './login/login-form'
 export RegisterFormWizard from './register/register-wizard'
 export SearchVacanciesForm from './dashboard/search-vacancies-form'
 export VacancyList from './vacancies/vacancy-list'
+export VacancyFilter from './vacancies/vacancy-filter'
 

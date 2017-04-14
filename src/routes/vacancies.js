@@ -7,7 +7,8 @@ import {connect} from 'react-redux'
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import { searchVacancies } from 'actions'
-import { VacancyList } from 'components'
+import { VacancyList, VacancyFilter } from 'components'
+
 
 @connect(({vacancies}, ownProps) => {
     return {
@@ -34,7 +35,7 @@ export default class Vacancies extends React.Component {
             <div>
                 <div className="vacancy-list-wrapper">
                     <VacancyList loading={isLoading} vacancies={vacancies}/>
-                    <div className="white-block"></div>
+                    <VacancyFilter />
                 </div>
                 <Pagination locale={{}}
                             onChange={this.handleChangePage}
