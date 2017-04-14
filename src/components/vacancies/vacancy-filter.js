@@ -7,15 +7,15 @@ import {Card, CardText, Toggle, SelectField, MenuItem } from 'material-ui'
 import {searchVacancies, fetchResourceList, fetchRegionList} from 'actions'
 import { connect } from 'react-redux';
 
-@connect(({vacancyFilters}) => ({
-    isHot:vacancyFilters.search.isHot,
-    region: vacancyFilters.search.region,
-    resource: vacancyFilters.search.resource,
+@connect(({vacancyFilters, resources, regions}) => ({
+    isHot:vacancyFilters.isHot,
+    selectedRegion: vacancyFilters.region,
+    selectedResource: vacancyFilters.resource,
 
-    regions:vacancyFilters.regions,
-    resources:vacancyFilters.resources,
-    isLoadResources:vacancyFilters.isResourcesFetching,
-    isLoadRegions: vacancyFilters.isRegionsFetching
+    regions:regions.regions,
+    isLoadRegions: regions.isFetching,
+    resources:resources.resources,
+    isLoadResources:resources.isFetching,
 
 }), {
     searchVacancies,
@@ -46,7 +46,14 @@ export default class VacancyFilter extends React.Component {
         this.props.fetchResourceList();
     }
     render(){
-        const {isHot, resource, region, regions, resources, isLoadResources, isLoadRegions} = this.props;
+        const {isHot,
+            selectedResource,
+            selectedRegion,
+            regions,
+            resources,
+            isLoadResources,
+            isLoadRegions
+        } = this.props;
         return (
             <Card className="white-block">
                 <CardText>
@@ -58,7 +65,7 @@ export default class VacancyFilter extends React.Component {
                     <br/>
                     <SelectField
                         floatingLabelText="Resource"
-                        value={resource}
+                        value={selectedResource}
                         disabled={isLoadResources}
                         onChange={this.handleResourceSelect}
                         fullWidth={true}
@@ -69,7 +76,7 @@ export default class VacancyFilter extends React.Component {
                     <br/>
                     <SelectField
                         floatingLabelText="Region"
-                        value={region}
+                        value={selectedRegion}
                         disabled={isLoadRegions}
                         onChange={this.handleRegionSelect}
                         fullWidth={true}
