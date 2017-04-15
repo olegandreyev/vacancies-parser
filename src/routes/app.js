@@ -4,10 +4,16 @@
 
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { AppBar, FlatButton } from 'material-ui'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import { AppBar, FlatButton, MenuItem } from 'material-ui'
+
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import { logout } from 'actions';
+
+
 
 @connect(({auth}, props) => {
     return {
@@ -27,9 +33,15 @@ export default class App extends React.Component {
         } else if(pathname === '/register'){
             rightAppEl = <FlatButton label="Login" onTouchTap={() => redirect('/login')} />;
         } else {
-            rightAppEl = <div>
-                {`Hello, ${user.firstName}`}
-                <FlatButton label="Sign out" onTouchTap={this.props.logout} /></div>;
+            rightAppEl =  <IconMenu iconButtonElement={
+                    <IconButton><MoreVertIcon /></IconButton>
+                }
+                targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+            >
+                <MenuItem primaryText="Settings" />
+                <MenuItem primaryText="Sign out" onTouchTap={this.props.logout} />
+            </IconMenu>
         }
         return rightAppEl;
     };

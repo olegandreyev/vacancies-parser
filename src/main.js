@@ -32,7 +32,7 @@ const checkAuth = (nextState, replace, callback) => {
                 user: response.data,
                 token
             }));
-            if(route === '/') {
+            if(route === '/' || route === '/login') {
                 replace("/dashboard");
             }
             callback();
