@@ -2,7 +2,7 @@
  * Created by Olejka on 21.03.2017.
  */
 
-import { AUTH_SUCCESS, SET_USER } from 'app_constants'
+import { AUTH_SUCCESS, SET_USER, LOGOUT } from 'app_constants'
 
 export function authSuccess(data){
     return {
@@ -11,6 +11,13 @@ export function authSuccess(data){
             user:data.user,
             token:data.token
         }
+    }
+}
+
+export function logout(){
+    return {
+        type:LOGOUT,
+        payload:{}
     }
 }
 

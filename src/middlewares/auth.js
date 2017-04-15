@@ -1,7 +1,7 @@
 
 
-import { AUTH_SUCCESS } from 'app_constants';
-import { push } from 'react-router-redux';
+import { AUTH_SUCCESS, LOGOUT } from 'app_constants';
+import { push, replace } from 'react-router-redux';
 import { client }  from 'helpers'
 
 const authMiddleware = store => next => action => {
@@ -11,6 +11,10 @@ const authMiddleware = store => next => action => {
         client.defaults.headers.common['Authorization'] = token;
         next(action);
         store.dispatch(push("/dashboard"))
+    } else if(action.type === LOGOUT) {
+        localStorage.removeItem("authToken");
+        store.dispatch(replace("/login"));
+        next(action);
     } else {
         next(action);
     }

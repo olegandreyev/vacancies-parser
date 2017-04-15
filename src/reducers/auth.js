@@ -8,7 +8,7 @@ const initialState = {
     isAuthenticated:false
 };
 
-import { AUTH_SUCCESS, SET_USER } from 'app_constants';
+import { AUTH_SUCCESS, SET_USER, LOGOUT } from 'app_constants';
 
 export default function(state = initialState,{type, payload}){
     switch (type){
@@ -20,6 +20,8 @@ export default function(state = initialState,{type, payload}){
                 token,
                 isAuthenticated:true
             };
+        case LOGOUT:
+            return initialState
         default:
             return state;
     }

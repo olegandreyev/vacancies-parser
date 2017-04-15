@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { AppBar, FlatButton } from 'material-ui'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
+import { logout } from 'actions';
 
 @connect(({auth}, props) => {
     return {
@@ -14,7 +15,8 @@ import { replace } from 'react-router-redux'
         isAuthenticated:auth.isAuthenticated,
     }
 }, {
-    redirect:replace
+    redirect:replace,
+    logout:logout
 })
 export default class App extends React.Component {
     getRightButton(){
@@ -24,6 +26,10 @@ export default class App extends React.Component {
             rightAppEl = <FlatButton label="Sign Up" onTouchTap={() => redirect('/register')} />;
         } else if(pathname === '/register'){
             rightAppEl = <FlatButton label="Login" onTouchTap={() => redirect('/login')} />;
+        } else {
+            rightAppEl = <div>
+                {`Hello, ${user.firstName}`}
+                <FlatButton label="Sign out" onTouchTap={this.props.logout} /></div>;
         }
         return rightAppEl;
     };
