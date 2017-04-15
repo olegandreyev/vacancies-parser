@@ -32,7 +32,7 @@ router.get("/resources", (req, res, next) => {
 });
 
 router.get('/vacancies/dayStatistic',(req, res, next) => {
-    Vacancy.vacanciesPerDayOfWeek().then(docs => {
+    Vacancy.vacanciesPerDayOfMonth().then(docs => {
         res.json(docs)
     }).catch(next)
 });

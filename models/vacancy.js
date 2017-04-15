@@ -122,11 +122,15 @@ VacancySchema.statics.searchVacancies = function(searchObj){
 
 };
 
-VacancySchema.statics.vacanciesPerDayOfWeek = function(){
+VacancySchema.statics.vacanciesPerDayOfMonth = function(){
     return new Promise((res, rej) => {
         this.aggregate([
             { $match: { 'createdAt': { $gte:moment().subtract(7,'days').toDate() } } },
-            { $group: { _id: { $dayOfWeek: "$createdAt"}, count: { $sum: 1 } } }
+            {$project:{
+                "day":{$dayOfMonth:"$createdAt"},
+                "month":{$month:"$createdAt"}}},
+            { $group: { _id: "$day", count: { $sum: 1 }, month:{$first:"$month"}, day:{$first:"$day"} }},
+            { $project:{month: 1, day:1, count:1, _id:0}}
         ] ,function(err, docs){
             if(err){
                 rej(err);
@@ -135,6 +139,6 @@ VacancySchema.statics.vacanciesPerDayOfWeek = function(){
             res(docs)
         });
     })
-}
+};
 
 module.exports = mongoose.model("Vacancy", VacancySchema);

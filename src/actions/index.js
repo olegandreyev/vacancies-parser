@@ -3,6 +3,6 @@
  */
 
 export { authSuccess, setUser, logout } from './auth'
-export { fetchVacancies, searchVacancies, fetchDayOfWeekStatistic } from './vacancies';
+export { fetchVacancies, searchVacancies, fetchDayOfMonthStatistic } from './vacancies';
 export { fetchRegionList } from './regions'
 export { fetchResourceList } from './resources'

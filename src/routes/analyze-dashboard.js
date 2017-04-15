@@ -1,17 +1,18 @@
 import React from 'react'
-import {Pie, HorizontalBar, Bar} from 'react-chartjs-2';
+import {Pie, HorizontalBar, Line} from 'react-chartjs-2';
 import {Card, CardText} from 'material-ui'
 import {connect} from 'react-redux';
-import { fetchDayOfWeekStatistic } from 'actions'
+import { fetchDayOfMonthStatistic } from 'actions'
+import moment from 'moment'
 
 @connect(({resources, regions, vacancies}) => {
     return {
         resourcesData: resources.resources,
         regionsData: regions.regions,
-        vacanciesPerDayOfWeek:vacancies.vacanciesPerDayOfWeek
+        vacanciesPerDayOfMonth:vacancies.vacanciesPerDayOfMonth
     }
 }, {
-    fetchDayOfWeekStatistic
+    fetchDayOfMonthStatistic
 })
 export default class AnalyzeDashboard extends React.Component {
     getResourceChartData = () => {
@@ -33,28 +34,36 @@ export default class AnalyzeDashboard extends React.Component {
             }]
         };
     };
-    getDayOfWeekStatistic = () => {
-        const { vacanciesPerDayOfWeek } = this.props;
-        const dayWeekMap = {
-            "1":"Пн",
-            "2":"Вт",
-            "3":"Ср",
-            "4":"Чт",
-            "5":"Пт",
-            "6":"Сб",
-            "7":"Вс"
-        };
+    getDayOfMonthStatistic = () => {
+        const { vacanciesPerDayOfMonth } = this.props;
         return {
-            labels: vacanciesPerDayOfWeek.sort((v1, v2) => v1._id - v2._id).map(v => dayWeekMap[v._id]),
+            labels: vacanciesPerDayOfMonth.sort((v1, v2) => v1.day - v2.day).map(v => {
+                return moment({
+                    month:v.month - 1,
+                    day:v.day
+                }).format("DD MMM")
+            }),
             datasets: [
                 {
-                    label: 'My First dataset',
-                    backgroundColor: 'rgba(255,99,132,0.2)',
-                    borderColor: 'rgba(255,99,132,1)',
-                    borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                    hoverBorderColor: 'rgba(255,99,132,1)',
-                    data: vacanciesPerDayOfWeek.sort((v1, v2) => v1._id - v2._id).map(v => v.count),
+                    label: 'Добавленные вакансии по дням',
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: 'rgba(75,192,192,0.4)',
+                    borderColor: 'rgba(75,192,192,1)',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: 'rgba(75,192,192,1)',
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: vacanciesPerDayOfMonth.sort((v1, v2) => v1.day - v2.day).map(v => v.count),
                 }
             ]
         }
@@ -78,7 +87,7 @@ export default class AnalyzeDashboard extends React.Component {
         }
     };
     componentDidMount(){
-        this.props.fetchDayOfWeekStatistic();
+        this.props.fetchDayOfMonthStatistic();
     }
     render() {
         return (
@@ -87,7 +96,7 @@ export default class AnalyzeDashboard extends React.Component {
                     <div style={{width: "49%"}}>
                         <Card>
                             <CardText>
-                                <Bar data={this.getDayOfWeekStatistic()}/>
+                                <Line data={this.getDayOfMonthStatistic()}/>
                             </CardText>
                         </Card>
                     </div>

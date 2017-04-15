@@ -11,7 +11,7 @@ Vacancy.aggregate([
     {$match: {'createdAt': {
         $gte:moment().subtract(7,'days').toDate()
     }}},
-    { $group: { _id: { $dayOfWeek: "$createdAt"}, count: { $sum: 1 } } }
+    { $group: { _id: { $dayOfMonth: "$createdAt"}, count: { $sum: 1 } } }
 ] ,function(err, docs){
     console.log(err)
     console.log(docs,'docs')

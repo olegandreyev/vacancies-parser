@@ -2,7 +2,7 @@
  * Created by Olejka on 10.04.2017.
  */
 
-import {SEARCH_VACANCIES, FETCH_VACANCIES, FETCH_VACANCIES_WEEKDAY} from 'app_constants';
+import {SEARCH_VACANCIES, FETCH_VACANCIES, FETCH_VACANCIES_MONTHDAY} from 'app_constants';
 import { client } from 'helpers';
 
 export function searchVacancies(searchObj){
@@ -19,9 +19,9 @@ export function fetchVacancies(searchObject){
     }
 }
 
-export function fetchDayOfWeekStatistic(){
+export function fetchDayOfMonthStatistic(){
     return {
-        type:FETCH_VACANCIES_WEEKDAY,
+        type:FETCH_VACANCIES_MONTHDAY,
         payload:client.get(`/api/vacancies/dayStatistic`).then(response => response.data)
     }
 }
