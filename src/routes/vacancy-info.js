@@ -20,6 +20,7 @@ export default class VacancyInfo extends React.Component {
     componentDidMount(){
         const { vacancyId } = this.props;
         this.props.fetchVacancyInfoIfNeeded(vacancyId);
+        document.body.scrollTop = 0;
     }
     render(){
         const {vacancy, isLoad} = this.props;

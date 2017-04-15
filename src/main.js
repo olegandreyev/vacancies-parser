@@ -16,7 +16,7 @@ import {syncHistoryWithStore} from 'react-router-redux'
 
 import configureStore from './configure-store'
 import configureClient from './configure-client';
-import {App, Login, Register, Main, VacancyList, AnalyzeDashboard, VacancyInfo} from 'routes';
+import {App, Login, Register, Main, Vacancies, AnalyzeDashboard, VacancyInfo} from 'routes';
 
 
 const store = configureStore();
@@ -64,7 +64,7 @@ ReactDOM.render(
                 <Route onEnter={requireAuth}>
                     <Route path="dashboard" component={Main}>
                         <IndexRoute component={AnalyzeDashboard}/>
-                        <Route path="search" component={VacancyList}/>
+                        <Route path="search" component={Vacancies}/>
                         <Route path="v/:id" component={VacancyInfo}/>
                     </Route>
                 </Route>

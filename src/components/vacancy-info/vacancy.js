@@ -21,6 +21,9 @@ export default class Vacancy extends React.Component {
                 <div className="v-info-block">
                     <h1>
                         {data.title}
+                        {data.isHot && <img className="v-ishot"
+                                               src={require('../../assets/hot-icon.png')}
+                                               alt="Hot Vacancy"/>}
                         </h1>
                 </div>
                 <div className="v-info-block v-main-info">
