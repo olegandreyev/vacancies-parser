@@ -59,7 +59,7 @@ class WorkUAStrategy {
                         fullDescr = parseText(fullDescr)
                     }
                     let additionalParams = [parseText( $('dd:last-child').text() )];
-                    let logo = $('.f-vacancy-logo-container img').attr('src') || null;
+                    let companyLogo = $('.f-vacancy-logo-container img').attr('src') || null;
 
                     let dd = $('dd')[0];
                     let companyLink = $(dd).find('a').attr('href');
@@ -69,7 +69,7 @@ class WorkUAStrategy {
                     return {
                         fullDescr,
                         additionalParams,
-                        logo,
+                        companyLogo,
                         companyLink,
                         postedAt
                     }

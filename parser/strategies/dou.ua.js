@@ -96,13 +96,13 @@ class DouUAStrategy {
                             fullDescr = parseText(fullDescr)
                         }
                         let additionalParams = [];
-                        let logo = $('.b-compinfo img').attr('src') || null;
+                        let companyLogo = $('.b-compinfo img').attr('src') || null;
                         let postedAt = parseText( $('.date').text() );
 
                         return {
                             fullDescr,
                             additionalParams,
-                            logo,
+                            companyLogo,
                             postedAt
                         }
                     })

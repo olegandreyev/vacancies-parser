@@ -69,12 +69,12 @@ class RabotaUAStrategy {
                     $('.f-additional-params .fd-farmer').each((i, el) => {
                         additionalParams.push($(el).text())
                     });
-                    let logo = $('.f-vacancy-logo-container img').attr('src') || null;
+                    let companyLogo = $('.f-vacancy-logo-container img').attr('src') || null;
                     let postedAt = parseText($('.f-vacancy-header-wrapper .f-date-holder').text()) || null;
                     return {
                         fullDescr,
                         additionalParams,
-                        logo,
+                        companyLogo,
                         postedAt
                     }
                 })
