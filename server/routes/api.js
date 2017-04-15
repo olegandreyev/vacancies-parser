@@ -31,6 +31,12 @@ router.get("/resources", (req, res, next) => {
     }).catch(next)
 });
 
+router.get('/vacancies/dayStatistic',(req, res, next) => {
+    Vacancy.vacanciesPerDayOfWeek().then(docs => {
+        res.json(docs)
+    }).catch(next)
+});
+
 router.get("/vacancies/autocomplete",(req, res, next) => {
     const urlObj = url.parse(req.url, true);
     Vacancy.find({

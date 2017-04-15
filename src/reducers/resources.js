@@ -5,6 +5,7 @@
 const initialState = {
     resources: [],
     isFetching:false,
+    isFetched:false
 };
 
 import {
@@ -26,12 +27,14 @@ export default function (state = initialState, {type, payload}) {
             return {
                 ...state,
                 isFetching: false,
+                isFetched:true,
                 resources:payload
             };
         case FETCH_RESOURCE_LIST_ERROR:
             return {
                 ...state,
                 isFetching:false,
+                isFetched:false,
                 resources:[]
             };
         default:

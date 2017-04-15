@@ -13,9 +13,9 @@ import { connect } from 'react-redux';
     selectedResource: vacancyFilters.resource,
 
     regions:regions.regions,
-    isLoadRegions: regions.isFetching,
+    isFetchedRegions: regions.isFetched,
     resources:resources.resources,
-    isLoadResources:resources.isFetching,
+    isFetchedResources:resources.isFetched,
 
 }), {
     searchVacancies,
@@ -41,18 +41,14 @@ export default class VacancyFilter extends React.Component {
             page:1
         })
     };
-    componentDidMount(){
-        this.props.fetchRegionList();
-        this.props.fetchResourceList();
-    }
     render(){
         const {isHot,
             selectedResource,
             selectedRegion,
             regions,
             resources,
-            isLoadResources,
-            isLoadRegions
+            isFetchedRegions,
+            isFetchedResources
         } = this.props;
         return (
             <Card className="white-block">
@@ -66,7 +62,7 @@ export default class VacancyFilter extends React.Component {
                     <SelectField
                         floatingLabelText="Resource"
                         value={selectedResource}
-                        disabled={isLoadResources}
+                        disabled={!isFetchedResources}
                         onChange={this.handleResourceSelect}
                         fullWidth={true}
                     >
@@ -77,7 +73,7 @@ export default class VacancyFilter extends React.Component {
                     <SelectField
                         floatingLabelText="Region"
                         value={selectedRegion}
-                        disabled={isLoadRegions}
+                        disabled={!isFetchedRegions}
                         onChange={this.handleRegionSelect}
                         fullWidth={true}
                     >

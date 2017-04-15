@@ -3,4 +3,6 @@
  */
 
 export { authSuccess, setUser, logout } from './auth'
-export { fetchVacancies, searchVacancies, fetchRegionList, fetchResourceList } from './vacancies';
+export { fetchVacancies, searchVacancies, fetchDayOfWeekStatistic } from './vacancies';
+export { fetchRegionList } from './regions'
+export { fetchResourceList } from './resources'

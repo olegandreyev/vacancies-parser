@@ -2,7 +2,7 @@
  * Created by Olejka on 10.04.2017.
  */
 
-import {SEARCH_VACANCIES, FETCH_VACANCIES, FETCH_REGION_LIST, FETCH_RESOURCE_LIST} from 'app_constants';
+import {SEARCH_VACANCIES, FETCH_VACANCIES, FETCH_VACANCIES_WEEKDAY} from 'app_constants';
 import { client } from 'helpers';
 
 export function searchVacancies(searchObj){
@@ -19,16 +19,10 @@ export function fetchVacancies(searchObject){
     }
 }
 
-export function fetchRegionList(){
+export function fetchDayOfWeekStatistic(){
     return {
-        type:FETCH_REGION_LIST,
-        payload:client.get("/api/regions").then(response => response.data)
+        type:FETCH_VACANCIES_WEEKDAY,
+        payload:client.get(`/api/vacancies/dayStatistic`).then(response => response.data)
     }
 }
 
-export function fetchResourceList(){
-    return {
-        type:FETCH_RESOURCE_LIST,
-        payload:client.get("/api/resources").then(response => response.data)
-    }
-}

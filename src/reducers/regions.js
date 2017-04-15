@@ -5,6 +5,7 @@
 const initialState = {
     regions: [],
     isFetching:false,
+    isFetched:false
 };
 
 import {
@@ -24,12 +25,14 @@ export default function (state = initialState, {type, payload}) {
             return {
                 ...state,
                 isFetching: false,
+                isFetched:true,
                 regions:payload
             };
         case FETCH_REGION_LIST_ERROR:
             return {
                 ...state,
                 isFetching:false,
+                isFetched:false,
                 regions:[]
             };
         default:

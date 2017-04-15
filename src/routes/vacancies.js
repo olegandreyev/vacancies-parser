@@ -15,7 +15,7 @@ import { VacancyList, VacancyFilter } from 'components'
         vacancies:vacancies.vacancies,
         count:vacancies.count,
         isLoading:vacancies.isFetching,
-        query:ownProps.location.query
+        query:ownProps.location.query,
     }
 }, {
     searchVacancies

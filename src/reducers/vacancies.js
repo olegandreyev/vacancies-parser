@@ -6,9 +6,19 @@ const initialState = {
     vacancies: [],
     isFetching: false,
     count: 0,
+    vacanciesPerDayOfWeek:[]
 };
 
-import {FETCH_VACANCIES_SUCCESS, FETCH_VACANCIES_PENDING, FETCH_VACANCIES_ERROR} from 'app_constants';
+import {
+    FETCH_VACANCIES_SUCCESS,
+    FETCH_VACANCIES_PENDING,
+    FETCH_VACANCIES_ERROR,
+
+    FETCH_VACANCIES_WEEKDAY_SUCCESS,
+    FETCH_VACANCIES_WEEKDAY_ERROR,
+    FETCH_VACANCIES_WEEKDAY_PENDING
+
+} from 'app_constants';
 
 export default function (state = initialState, {type, payload}) {
     switch (type) {
@@ -30,6 +40,15 @@ export default function (state = initialState, {type, payload}) {
                 count: 0,
                 vacancies: [],
                 isFetching: false,
+            };
+        case FETCH_VACANCIES_WEEKDAY_SUCCESS:
+            return {
+                ...state,
+                vacanciesPerDayOfWeek:payload
+            };
+        case FETCH_VACANCIES_WEEKDAY_ERROR:
+            return {
+                vacanciesPerDayOfWeek:[]
             };
         default:
             return state;

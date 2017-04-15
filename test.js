@@ -5,18 +5,15 @@
 require("dotenv").config();
 const DB = require('./db');
 const Vacancy = require('./models/vacancy');
+const moment = require('moment');
 
 Vacancy.aggregate([
-    {$unwind: "$region" },
-    {$group: { _id: "$region", count: { $sum: 1 } }},
-], function(err, docs){
+    {$match: {'createdAt': {
+        $gte:moment().subtract(7,'days').toDate()
+    }}},
+    { $group: { _id: { $dayOfWeek: "$createdAt"}, count: { $sum: 1 } } }
+] ,function(err, docs){
     console.log(err)
     console.log(docs,'docs')
 });
 
-Vacancy.aggregate([
-    {$group: { _id: "$resource", count: { $sum: 1 } }},
-], function(err, docs){
-    console.log(err)
-    console.log(docs,'docs')
-});

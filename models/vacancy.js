@@ -70,7 +70,7 @@ VacancySchema.statics.getRegions = function(){
     return new Promise((res, rej) => {
         this.aggregate([
             {$unwind: "$region" },
-            {$group: { _id: "$region"}},
+            {$group: { _id: "$region", count:{$sum:1}}},
         ], function(err, docs){
             if(err){
                 rej(err);
@@ -84,7 +84,7 @@ VacancySchema.statics.getRegions = function(){
 VacancySchema.statics.getResources = function(){
     return new Promise((res, rej) => {
         this.aggregate([
-            {$group: { _id: "$resource" }},
+            {$group: { _id: "$resource" ,count:{$sum:1}} },
         ], function(err, docs){
             if(err){
                 rej(err);
@@ -121,5 +121,20 @@ VacancySchema.statics.searchVacancies = function(searchObj){
     })
 
 };
+
+VacancySchema.statics.vacanciesPerDayOfWeek = function(){
+    return new Promise((res, rej) => {
+        this.aggregate([
+            { $match: { 'createdAt': { $gte:moment().subtract(7,'days').toDate() } } },
+            { $group: { _id: { $dayOfWeek: "$createdAt"}, count: { $sum: 1 } } }
+        ] ,function(err, docs){
+            if(err){
+                rej(err);
+                return
+            }
+            res(docs)
+        });
+    })
+}
 
 module.exports = mongoose.model("Vacancy", VacancySchema);
