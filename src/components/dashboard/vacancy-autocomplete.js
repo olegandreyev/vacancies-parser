@@ -19,7 +19,7 @@ const debouncePromise = (cb, delay) => {
     }
 };
 
-const searchTitles = debouncePromise((searchText) =>  client.get(`/api/vacancies/autocomplete?text=${searchText}`), 1000);
+const searchTitles = debouncePromise((searchText) =>  client.get(`/api/autocomplete?text=${searchText}`), 1000);
 
 export default class VacancyAutoComplete extends React.Component {
     state = {

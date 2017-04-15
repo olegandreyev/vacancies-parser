@@ -47,7 +47,7 @@ router.get("/vacancies/:id", (req, res, next) => {
     })
 })
 
-router.get("/vacancies/autocomplete",(req, res, next) => {
+router.get("/autocomplete",(req, res, next) => {
     const urlObj = url.parse(req.url, true);
     Vacancy.find({
         title:{
