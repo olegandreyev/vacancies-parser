@@ -1,6 +1,6 @@
 import React from 'react'
 import {Pie, HorizontalBar, Line} from 'react-chartjs-2';
-import {Card, CardText} from 'material-ui'
+import { Paper } from 'material-ui'
 import {connect} from 'react-redux';
 import { fetchDayOfMonthStatistic } from 'actions'
 import moment from 'moment'
@@ -94,26 +94,20 @@ export default class AnalyzeDashboard extends React.Component {
             <div className="analyze-data-wrapper">
                 <div className="analyze-first-section">
                     <div style={{width: "49%"}}>
-                        <Card>
-                            <CardText>
-                                <Line data={this.getDayOfMonthStatistic()}/>
-                            </CardText>
-                        </Card>
+                        <Paper className="paper">
+                            <Line data={this.getDayOfMonthStatistic()}/>
+                        </Paper>
                     </div>
                     <div style={{width: "49%"}}>
-                        <Card>
-                            <CardText>
-                                <Pie data={this.getResourceChartData()}/>
-                            </CardText>
-                        </Card>
+                        <Paper className="paper">
+                            <Pie data={this.getResourceChartData()}/>
+                        </Paper>
                     </div>
                 </div>
                 <div className="analyze-second-section">
-                    <Card>
-                        <CardText>
-                            <HorizontalBar height={300} data={this.getRegionsChartData()}/>
-                        </CardText>
-                    </Card>
+                    <Paper className="paper">
+                        <HorizontalBar height={300} data={this.getRegionsChartData()}/>
+                    </Paper>
                 </div>
             </div>
         )

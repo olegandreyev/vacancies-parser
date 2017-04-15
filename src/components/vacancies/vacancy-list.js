@@ -3,14 +3,12 @@
  */
 
 import React from 'react';
-import {Card, CardText, FontIcon, Chip} from 'material-ui'
+import {Paper, FontIcon} from 'material-ui'
 import {Link} from 'react-router'
 import LinearProgress from 'material-ui/LinearProgress';
-import moment from 'moment'
 
 const VacancyItem = ({vacancy}) => (
-    <Card className="v-item">
-        <CardText>
+    <Paper className="v-item paper">
             <div className="v-body">
                 <div className="vacancy-title-block">
                     <span className="v-title">
@@ -47,10 +45,7 @@ const VacancyItem = ({vacancy}) => (
                     <div className={`v-logo-link ${vacancy.resource}`}></div>
                 </a>
             </div>
-
-
-        </CardText>
-    </Card>
+    </Paper>
 );
 
 export default class VacancyList extends React.Component {

@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {Card, CardText, Toggle, SelectField, MenuItem } from 'material-ui'
+import {Paper, Toggle, SelectField, MenuItem } from 'material-ui'
 import {searchVacancies, fetchResourceList, fetchRegionList} from 'actions'
 import { connect } from 'react-redux';
 
@@ -51,8 +51,7 @@ export default class VacancyFilter extends React.Component {
             isFetchedResources
         } = this.props;
         return (
-            <Card className="white-block">
-                <CardText>
+            <Paper className="white-block paper">
                     <Toggle
                         label="Показать только горячие вакансии"
                         onToggle={this.handleHotToggler}
@@ -80,8 +79,7 @@ export default class VacancyFilter extends React.Component {
                         <MenuItem value={null} primaryText="" />
                         {regions.map(res => <MenuItem key={res._id} primaryText={res._id} value={res._id} />)}
                     </SelectField>
-                </CardText>
-            </Card>
+            </Paper>
         )
     }
 }

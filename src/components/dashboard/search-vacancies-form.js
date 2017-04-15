@@ -3,11 +3,11 @@
  */
 
 import React from 'react';
-import {RaisedButton, Card, CardText} from 'material-ui'
+import {RaisedButton, Paper} from 'material-ui'
 import VacancyAutoComplete from './vacancy-autocomplete'
 import {reduxForm, Field} from 'redux-form';
 
-const renderAutoComplete = ({input}) =>(
+const renderAutoComplete = ({input}) => (
     <VacancyAutoComplete {...input} />
 );
 
@@ -16,21 +16,19 @@ const renderAutoComplete = ({input}) =>(
 })
 export default class SearchVacanciesForm extends React.Component {
     render() {
-        const { handleSubmit } = this.props;
+        const {handleSubmit} = this.props;
         return (
             <div className="vacancy-from-wrapper">
-                <Card>
-                    <CardText expandable={false}>
-                        <form onSubmit={handleSubmit}>
-                            <Field name="keywords" component={renderAutoComplete}/>
-                            <RaisedButton onClick={handleSubmit}
-                                          type="submit"
-                                          primary={true}
-                                          label="Поиск"
-                                          style={{marginLeft: 10}}/>
-                        </form>
-                    </CardText>
-                </Card>
+                <Paper className="paper">
+                    <form onSubmit={handleSubmit}>
+                        <Field name="keywords" component={renderAutoComplete}/>
+                        <RaisedButton onClick={handleSubmit}
+                                      type="submit"
+                                      primary={true}
+                                      label="Поиск"
+                                      style={{marginLeft: 10}}/>
+                    </form>
+                </Paper>
             </div>
         )
 

@@ -7,15 +7,20 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { AppBar, FlatButton, MenuItem } from 'material-ui'
 
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import { logout } from 'actions';
 
+const muiTheme = getMuiTheme({
+    paper: {
+        padding: 16,
+    }
+});
 
-
-@connect(({auth}, props) => {
+@connect(({auth}) => {
     return {
         user:auth.user,
         isAuthenticated:auth.isAuthenticated,
@@ -47,7 +52,7 @@ export default class App extends React.Component {
     };
     render(){
         return (
-            <MuiThemeProvider>
+            <MuiThemeProvider muiTheme={muiTheme}>
                 <div className="page-wrapper">
                     <AppBar
                         title="Job Helper"

@@ -5,7 +5,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchVacancyInfoIfNeeded } from 'actions';
-import { LinearProgress, Card, CardText } from 'material-ui'
+import { LinearProgress, Paper } from 'material-ui'
 import { Vacancy } from 'components'
 import moment from 'moment'
 
@@ -25,12 +25,10 @@ export default class VacancyInfo extends React.Component {
     render(){
         const {vacancy, isLoad} = this.props;
         return (
-            <Card style={{minHeight:400}}>
-                <CardText>
-                    {isLoad && <LinearProgress mode='indeterminate'/>}
-                    {vacancy && <Vacancy data={vacancy}/>}
-                </CardText>
-            </Card>
+            <Paper className="paper" style={{minHeight:400}}>
+                {isLoad && <LinearProgress mode='indeterminate'/>}
+                {vacancy && <Vacancy data={vacancy}/>}
+            </Paper>
         )
     }
 }
