@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {Card, CardText, FontIcon} from 'material-ui'
+import {Card, CardText, FontIcon, CardTitle} from 'material-ui'
 import {Link} from 'react-router'
 import LinearProgress from 'material-ui/LinearProgress';
 
@@ -18,6 +18,8 @@ const VacancyItem = ({vacancy}) => (
                             {vacancy.isHot && <img className="v-ishot"
                                                    src={require('../../assets/hot-icon.png')}
                                                    alt="Hot Vacancy"/>}
+
+                            {vacancy.companyLogo && <img src={vacancy.companyLogo} width="200" alt="company logo"/> }
                         </Link>
                     </span>
 

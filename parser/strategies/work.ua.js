@@ -42,7 +42,7 @@ class WorkUAStrategy {
                 vacancy.title = parseText( $link.text() );
                 vacancy.salary = parseText( $link.next().text().replace(",", '') ) || null;
                 vacancy.isHot = !!$row.find('.label-hot').length;
-                vacancy.logo = $row.find('.logo-img img').attr('src') || null;
+                vacancy.companyLogo = $row.find('.logo-img img').attr('src') || null;
                 vacancy.companyName = parseText( $row.find('div:not(.logo-img)').find('span:first-child').text().replace("·",'') );
                 vacancy.shortDescr = parseText( $row.find('p').text() );
                 vacancy.tags = [];
@@ -59,7 +59,6 @@ class WorkUAStrategy {
                         fullDescr = parseText(fullDescr)
                     }
                     let additionalParams = [parseText( $('dd:last-child').text() )];
-                    let companyLogo = $('.f-vacancy-logo-container img').attr('src') || null;
 
                     let dd = $('dd')[0];
                     let companyLink = $(dd).find('a').attr('href');
@@ -69,7 +68,6 @@ class WorkUAStrategy {
                     return {
                         fullDescr,
                         additionalParams,
-                        companyLogo,
                         companyLink,
                         postedAt
                     }

@@ -45,7 +45,7 @@ class RabotaUAStrategy {
                 vacancy.salary = salary ? parseText( salary ) : null;
                 vacancy.region = parseText( $row.find('p[class="fd-merchant"]').text() ).split(", ");
                 vacancy.shortDescr = $row.find('.f-vacancylist-shortdescr').text();
-                vacancy.logo = $row.find('.f-vacancylist-companylogo img').attr('src') || null;
+                vacancy.companyLogo = $row.find('.f-vacancylist-companylogo img').attr('src') || null;
                 vacancy.tags = [];
                 vacancy.resource = 'rabota-ua';
                 $row.find('.f-vacancylist-tags').find('a').each((i,el) => {
