@@ -20,16 +20,16 @@ class RegisterPage2 extends React.Component {
         return (
             <form onSubmit={handleSubmit}>
                 <p>
-                    Please use password with different letter case and numbers!
+                    Пожалуйста используйте пароль с буквами разного регистра и цифрами.
                 </p>
                 <div>
-                    <Field name="password" component={renderTextField} label="Password"/>
+                    <Field type="password" name="password" component={renderTextField} label="Пароль"/>
                     <br/>
-                    <Field name="repeatPassword" component={renderTextField} label="Repeat Password"/>
+                    <Field type="password" name="repeatPassword" component={renderTextField} label="Подтверждение пароля"/>
                 </div>
                 <div  className="register-form-btns">
-                    <FlatButton label="Back" onTouchTap={prevPage} />
-                    <RaisedButton onTouchTap={handleSubmit} label="Next" primary={true} />
+                    <FlatButton label="Назад" onTouchTap={prevPage} />
+                    <RaisedButton onTouchTap={handleSubmit} label="Далее" primary={true} />
                 </div>
             </form>
         )

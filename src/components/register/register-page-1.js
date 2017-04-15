@@ -13,10 +13,10 @@ const isUniqueEmail = (values) => {
     return axios.post("/isUniqueEmail", {email:values.email})
         .then(result => {
             if(result.data){
-                throw {email:"Already Exists!"}
+                throw {email:"Пользователь с таки адресом уже существует."}
             }
         }, err => {
-            throw {email:"Unknown Error!"}
+            throw {email:"Неизвестная ошибка"}
         })
 };
 
@@ -34,14 +34,14 @@ class RegisterPage1 extends React.Component {
         return (
             <form onSubmit={handleSubmit}>
                 <p>
-                    Please use a real email address, It's required if you want to reset your password!
+                    Пожалуйста используйте настоящий Email адрес, после регистрации вам должна прийти ссылка на подтверждение
                 </p>
                 <div>
                     <Field name="email" component={renderTextField} label="Email"/>
                 </div>
                 <div className="register-form-btns">
-                    <FlatButton  label="Back" disabled={true} />
-                    <RaisedButton onTouchTap={handleSubmit} label="Next" primary={true} />
+                    <FlatButton  label="Назад" disabled={true} />
+                    <RaisedButton onTouchTap={handleSubmit} label="Далее" primary={true} />
                 </div>
             </form>
         )

@@ -26,7 +26,7 @@ export default class SearchVacanciesForm extends React.Component {
                             <RaisedButton onClick={handleSubmit}
                                           type="submit"
                                           primary={true}
-                                          label="Search"
+                                          label="Поиск"
                                           style={{marginLeft: 10}}/>
                         </form>
                     </CardText>

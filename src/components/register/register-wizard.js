@@ -75,7 +75,7 @@ class RegisterFormWizard extends React.Component {
             case 3:
                 return <p>
                     <FontIcon className="fa fa-envelope-o" style={{marginRight:5}}/>
-                    The confirmation link has been sent to your mailing address. This link will be valid for 6 hours
+                    Ссылка подтверждения была отправлена на ваш Email адрес, Она будет корректной в течении 6-ти часов.
                 </p>;
             default:
                 return <p>Unknown Page</p>
@@ -88,7 +88,7 @@ class RegisterFormWizard extends React.Component {
         return (
             <Card style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
                 <CardHeader
-                    title="Registration"
+                    title="Регистрация"
                     titleColor="white"
                     style={{backgroundColor: pink500}}
                     titleStyle={{fontSize: 21}}
@@ -96,13 +96,13 @@ class RegisterFormWizard extends React.Component {
                 <CardText>
                     <Stepper activeStep={stepIndex}>
                         <Step>
-                            <StepLabel>Set email address</StepLabel>
+                            <StepLabel>Установка Email адреса</StepLabel>
                         </Step>
                         <Step>
-                            <StepLabel>Create password</StepLabel>
+                            <StepLabel>Создание пароля</StepLabel>
                         </Step>
                         <Step>
-                            <StepLabel>Additional Information</StepLabel>
+                            <StepLabel>Дополнительная информация</StepLabel>
                         </Step>
                     </Stepper>
                     <ExpandTransition loading={loading} open={true}>

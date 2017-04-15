@@ -54,13 +54,13 @@ export default class VacancyFilter extends React.Component {
             <Card className="white-block">
                 <CardText>
                     <Toggle
-                        label="Show only hot vacancies"
+                        label="Показать только горячие вакансии"
                         onToggle={this.handleHotToggler}
                         toggled={isHot}
                     />
                     <br/>
                     <SelectField
-                        floatingLabelText="Resource"
+                        floatingLabelText="Ресурс"
                         value={selectedResource}
                         disabled={!isFetchedResources}
                         onChange={this.handleResourceSelect}
@@ -71,7 +71,7 @@ export default class VacancyFilter extends React.Component {
                     </SelectField>
                     <br/>
                     <SelectField
-                        floatingLabelText="Region"
+                        floatingLabelText="Регион"
                         value={selectedRegion}
                         disabled={!isFetchedRegions}
                         onChange={this.handleRegionSelect}

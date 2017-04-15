@@ -28,7 +28,7 @@ export default class LoginForm extends React.Component {
         return (
             <Card className="login-form">
                 <CardHeader
-                    title="Login"
+                    title="Вход"
                     titleColor="white"
                     style={{backgroundColor: deepPurple600}}
                     titleStyle={{fontSize: 21}}
@@ -37,19 +37,19 @@ export default class LoginForm extends React.Component {
                     <form onSubmit={handleSubmit}>
                         <Field fullWidth={true} name="email" component={renderTextField} label="Email"/>
                         <br/>
-                        <Field fullWidth={true} name="password" type="password" component={renderTextField} label="Password"/>
+                        <Field fullWidth={true} name="password" type="password" component={renderTextField} label="Пароль"/>
                     </form>
                     <div style={{textAlign:'center',color:red500}}>
                         {error && <strong>{error}</strong>}
                     </div>
                 </CardText>
                 <CardActions style={{textAlign: 'right'}}>
-                    <RaisedButton disabled={submitting} onClick={handleSubmit} label="Login" secondary={true}/>
+                    <RaisedButton disabled={submitting} onClick={handleSubmit} label="Вход" secondary={true}/>
                 </CardActions>
                 <Divider/>
                 <CardActions className="login-form-another-actions" style={{padding: 12}}>
-                    <span className="mute-color">Forgot Your Password?</span>
-                    <Link to="register"><span className="mute-color no-underline">Register</span></Link>
+                    <span className="mute-color">Забыли свой пароль?</span>
+                    <Link to="register"><span className="mute-color no-underline">Регистрация</span></Link>
                 </CardActions>
             </Card>
         )

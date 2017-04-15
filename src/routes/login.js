@@ -24,9 +24,9 @@ export default class Login extends React.Component {
         const {emailConfirmStatus} = query;
         if (emailConfirmStatus !== undefined) {
             let booleanStatus = emailConfirmStatus === 'true';
-            let message = 'Email has been verified, now you can login into your account using your email and password!';
+            let message = 'Email адрес был подтвержден, теперь вы можете зайти в систему использую свой логин и пароль.';
             if (!booleanStatus) {
-                message = 'Invalid verification token!';
+                message = 'Некорректная ссылка подтверждения Email адреса.';
             }
             this.setState({verifyStatus: message});
             redirect("/login")
@@ -41,11 +41,11 @@ export default class Login extends React.Component {
             }).catch(err => {
                 const status = err.response.status;
                 if (status === 401) {
-                    throw new SubmissionError({_error: "Incorrect Email or Password"})
+                    throw new SubmissionError({_error: "Неверный Email или Пароль!"})
                 } else if(status === 403) {
                     throw new SubmissionError({_error: err.response.data.error})
                 } else {
-                    throw new SubmissionError({_error: "Unknown Error!"})
+                    throw new SubmissionError({_error: "Неизвестная ошибка!"})
                 }
             })
     };

@@ -21,16 +21,16 @@ class RegisterPage3 extends React.Component {
         return (
             <form onSubmit={handleSubmit}>
                 <p>
-                    Please fill your private information!
+                    Заполните вашу персональную информацию!
                 </p>
                 <div>
-                    <Field name="firstName" component={renderTextField} label="First Name"/>
+                    <Field name="firstName" component={renderTextField} label="Имя"/>
                     <br/>
-                    <Field name="lastName" component={renderTextField} label="Last Name"/>
+                    <Field name="lastName" component={renderTextField} label="Фамилия"/>
                 </div>
                 <div className="register-form-btns" >
-                    <FlatButton label="Back" onTouchTap={prevPage} />
-                    <RaisedButton disabled={submitting} onTouchTap={handleSubmit} label="Finish" primary={true} />
+                    <FlatButton label="Назад" onTouchTap={prevPage} />
+                    <RaisedButton disabled={submitting} onTouchTap={handleSubmit} label="Завершить" primary={true} />
                 </div>
                 <div className="register-form-errors" style={{color:red500}}>
                     {error && <strong>
