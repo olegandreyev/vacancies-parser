@@ -4,3 +4,4 @@
 
 export authMiddleware from './auth'
 export searchMiddleware from './vacancies'
+export vacancyInfoMiddleware from './vacancy-info'

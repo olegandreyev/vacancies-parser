@@ -71,8 +71,8 @@ class DouUAStrategy {
             $('li.l-vacancy').each((i, row) => {
                 const vacancy = {};
                 const $row = $(row);
-                vacancy._id = $row.find('a.vt').attr('href').replace('?from=list_hot',"");
-                if(!vacancy._id)return;
+                vacancy.vacancyId = $row.find('a.vt').attr('href').replace('?from=list_hot',"");
+                if(!vacancy.vacancyId)return;
                 let regionStr = parseText( $row.find('span.cities').text().replace("?","") );
                 vacancy.region = !regionStr ? ["Другой"] : regionStr.split(", ");
                 vacancy.title = parseText( $row.find('a.vt').text() );
@@ -80,7 +80,7 @@ class DouUAStrategy {
                 vacancy.shortDescr = parseText( $row.find('.sh-info').text() ) || null;
                 vacancy.salary = parseText( $row.find('.salary').text() ) || null;
                 vacancy.tags = [];
-                vacancy.link = vacancy._id;
+                vacancy.link = vacancy.vacancyId;
                 vacancy.companyLink = $row.find('a.company').attr("href");
                 vacancy.resource = 'dou-ua';
                 vacancy.isHot = $row.is(".__hot");
@@ -97,13 +97,11 @@ class DouUAStrategy {
                         }
                         let additionalParams = [];
                         let companyLogo = $('.b-compinfo img').attr('src') || null;
-                        let postedAt = parseText( $('.date').text() );
 
                         return {
                             fullDescr,
                             additionalParams,
-                            companyLogo,
-                            postedAt
+                            companyLogo
                         }
                     })
                 });

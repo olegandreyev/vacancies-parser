@@ -7,7 +7,11 @@ const moment = require('moment');
 const Schema = mongoose.Schema;
 
 const VacancySchema = new Schema({
-    _id:String,
+    vacancyId:{
+        required:true,
+        type:String,
+        unique:true
+    },
     title:String,
     link:String,
     isHot:Boolean,
@@ -28,9 +32,7 @@ const VacancySchema = new Schema({
         enum: ['work-ua', 'rabota-ua', 'dou-ua'],
     },
     additionalParams:[String],
-    postedAt:String
 },{
-    _id:false,
     timestamps:true
 });
 

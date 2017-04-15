@@ -25,7 +25,7 @@ const searchMiddleware = store => next => action => {
         if(route === '/dashboard/search') {
             store.dispatch(fetchVacancies(searchObj))
         }
-    } else{
+    } else {
         next(action);
     }
 };

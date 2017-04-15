@@ -3,9 +3,10 @@
  */
 
 import React from 'react';
-import {Card, CardText, FontIcon, CardTitle} from 'material-ui'
+import {Card, CardText, FontIcon, Chip} from 'material-ui'
 import {Link} from 'react-router'
 import LinearProgress from 'material-ui/LinearProgress';
+import moment from 'moment'
 
 const VacancyItem = ({vacancy}) => (
     <Card className="v-item">
@@ -13,13 +14,11 @@ const VacancyItem = ({vacancy}) => (
             <div className="v-body">
                 <div className="vacancy-title-block">
                     <span className="v-title">
-                        <Link to="/">
+                        <Link to={`/dashboard/v/${vacancy._id}`}>
                         {vacancy.title}
                             {vacancy.isHot && <img className="v-ishot"
                                                    src={require('../../assets/hot-icon.png')}
                                                    alt="Hot Vacancy"/>}
-
-                            {vacancy.companyLogo && <img src={vacancy.companyLogo} width="200" alt="company logo"/> }
                         </Link>
                     </span>
 
@@ -38,11 +37,17 @@ const VacancyItem = ({vacancy}) => (
                     {vacancy.shortDescr}
                 </div>
             </div>
+            <div className="tags">
+                {vacancy.tags.map((t,i) =>
+                    <div key={`${t}_${i}`}>{t}</div>
+                )}
+            </div>
             <div className="resource-logo-link">
                 <a href={vacancy.link} target="blank">
                     <div className={`v-logo-link ${vacancy.resource}`}></div>
                 </a>
             </div>
+
 
         </CardText>
     </Card>

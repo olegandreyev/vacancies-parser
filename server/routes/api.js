@@ -31,11 +31,21 @@ router.get("/resources", (req, res, next) => {
     }).catch(next)
 });
 
-router.get('/vacancies/dayStatistic',(req, res, next) => {
+router.get('/dayStatistic',(req, res, next) => {
     Vacancy.vacanciesPerDayOfMonth().then(docs => {
         res.json(docs)
     }).catch(next)
 });
+
+router.get("/vacancies/:id", (req, res, next) => {
+    Vacancy.findById(req.params.id, function(err, doc){
+        if(err){
+            next(err);
+            return;
+        }
+        res.json(doc)
+    })
+})
 
 router.get("/vacancies/autocomplete",(req, res, next) => {
     const urlObj = url.parse(req.url, true);

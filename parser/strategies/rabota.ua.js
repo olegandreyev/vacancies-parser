@@ -35,11 +35,11 @@ class RabotaUAStrategy {
                 const vacancy = {};
                 const $row = $(row);
 
-                vacancy._id = $row.find('.f-vacancylist-vacancytitle a').attr('href');
-                if(!vacancy._id) return;
+                vacancy.vacancyId = $row.find('.f-vacancylist-vacancytitle a').attr('href');
+                if(!vacancy.vacancyId) return;
                 const $link = $row.find('.f-vacancylist-vacancytitle a');
                 vacancy.title = parseText($link.text());
-                vacancy.link = VACANCIES_HOST+vacancy._id.slice(1);
+                vacancy.link = VACANCIES_HOST+vacancy.vacancyId.slice(1);
                 vacancy.isHot = !!$link.find('.f-vacancylist-characs-block  .fi-hot').length;
                 const salary = $row.find('.-price').text();
                 vacancy.salary = salary ? parseText( salary ) : null;
@@ -70,12 +70,10 @@ class RabotaUAStrategy {
                         additionalParams.push($(el).text())
                     });
                     let companyLogo = $('.f-vacancy-logo-container img').attr('src') || null;
-                    let postedAt = parseText($('.f-vacancy-header-wrapper .f-date-holder').text()) || null;
                     return {
                         fullDescr,
                         additionalParams,
-                        companyLogo,
-                        postedAt
+                        companyLogo
                     }
                 })
             });

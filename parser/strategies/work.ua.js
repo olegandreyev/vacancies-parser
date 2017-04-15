@@ -35,9 +35,9 @@ class WorkUAStrategy {
                 const $row = $(row);
                 const vacancy = {};
                 const $link = $row.find('h2 a');
-                vacancy._id = $link.attr('href');
-                if(!vacancy._id) return;
-                vacancy.link = VACANCIES_HOST+vacancy._id.slice(1);
+                vacancy.vacancyId = $link.attr('href');
+                if(!vacancy.vacancyId) return;
+                vacancy.link = VACANCIES_HOST+vacancy.vacancyId.slice(1);
                 vacancy.resource = 'work-ua';
                 vacancy.title = parseText( $link.text() );
                 vacancy.salary = parseText( $link.next().text().replace(",", '') ) || null;
@@ -54,7 +54,7 @@ class WorkUAStrategy {
             const links = vacancies.map(v => v.link);
             const promises = promiseQueue(links,(url) => {
                 return rp( getRequestOption(url, false) ).then($ => {
-                    let fullDescr = $('.overflow.wordwrap').html();
+                    let fullDescr = $('.side-lines + .overflow.wordwrap').html();
                     if(fullDescr){
                         fullDescr = parseText(fullDescr)
                     }
@@ -63,13 +63,11 @@ class WorkUAStrategy {
                     let dd = $('dd')[0];
                     let companyLink = $(dd).find('a').attr('href');
                      companyLink = companyLink ? VACANCIES_HOST + companyLink.slice(1) : null;
-                    let postedAt =  null;
 
                     return {
                         fullDescr,
                         additionalParams,
-                        companyLink,
-                        postedAt
+                        companyLink
                     }
                 })
             });
