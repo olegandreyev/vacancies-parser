@@ -14,7 +14,6 @@ router.get('/me',(req, res) => {
 
 router.post("/vacancies",(req, res, next) => {
     let query = req.body;
-    console.log(query);
     Vacancy.searchVacancies(query).then(({docs, count}) => {
         res.json({docs, count})
     }).catch(next);
