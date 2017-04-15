@@ -39,7 +39,13 @@ const VacancySchema = new Schema({
 const _pageSize = 15;
 
 
-VacancySchema.index({'$**': 'text'});
+VacancySchema.index({
+        'title': 'text',
+        'fullDescr':'text',
+        'region':'text',
+        'companyName':'text',
+        'tags':'text'
+});
 
 VacancySchema.statics.removeOld = function(){
     return this.remove({
@@ -54,7 +60,7 @@ const createMongoSearch = searchObj => {
     let {region, keywords, resource, isHot} = searchObj;
     if(keywords){
         result.$text = {
-            $search: keywords
+            $search: `"${keywords}"`,
         }
     }
     if(region){
