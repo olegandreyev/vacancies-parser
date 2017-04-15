@@ -30,12 +30,10 @@ class Parser {
                        return this.parseVacancies();
                    }, err => {
                       if(err.code === 11000){
-                          const addedDocsCount = vacancies.length - err.writeErrors.length;
-                          if(!err.writeErrors || (addedDocsCount > vacancies.length / 2 )){
+                          if(!err.writeErrors || (vacancies.length - err.writeErrors.length > vacancies.length / 2 )){
                               return this.parseVacancies();
                           }
-                          console.log(`duplicated keys, stop parsing ${this.strategy.name}! 
-                           new docs: ${addedDocsCount} has been added`);
+                          console.log(`duplicated keys, stop parsing ${this.strategy.name}`);
                           return true;
                       } else {
                           console.log(err,'error');

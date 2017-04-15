@@ -111,7 +111,7 @@ export default class AnalyzeDashboard extends React.Component {
                 <div className="analyze-second-section">
                     <Card>
                         <CardText>
-                            <HorizontalBar data={this.getRegionsChartData()}/>
+                            <HorizontalBar height={300} data={this.getRegionsChartData()}/>
                         </CardText>
                     </Card>
                 </div>

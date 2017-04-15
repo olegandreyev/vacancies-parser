@@ -16,7 +16,10 @@ const VacancySchema = new Schema({
     shortDescr:String,
     fullDescr:String,
     companyLink:String,
-    companyLogo:String,
+    companyLogo:{
+        type:String,
+        default:null
+    },
     companyName:String,
     tags:Array,
     resource:{
