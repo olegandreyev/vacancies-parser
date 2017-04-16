@@ -6,10 +6,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect(process.env.DB_URI,{
     server: {
-        socketOptions: {
-            socketTimeoutMS: 0,
-            connectTimeout: 0
-        }
+        socketTimeoutMS: 0,
+        connectTimeoutMS: 0
     }
 });
 
