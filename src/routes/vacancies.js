@@ -23,6 +23,7 @@ import { VacancyList, VacancyFilter } from 'components'
 export default class Vacancies extends React.Component {
     componentDidMount() {
         let {keywords, page, isHot, region, resource} = this.props.query;
+        debugger
         //synchronize query params and store
         this.props.searchVacancies({
             keywords:keywords || '',

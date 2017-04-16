@@ -21,7 +21,7 @@ export default function(state = initialState,{type, payload}){
                 isAuthenticated:true
             };
         case LOGOUT:
-            return initialState
+            return initialState;
         default:
             return state;
     }

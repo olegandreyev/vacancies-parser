@@ -9,7 +9,8 @@ const jwt = require('jsonwebtoken'),
 
 
 exports.isEmailVerified = function(req, res, next){
-    if(req.user.isEmailVerified){
+    const user = req.user;
+    if(user.isEmailVerified){
         next()
     } else {
         sendEmail(user.email,`
@@ -106,12 +107,14 @@ exports.confirmEmail = function(req, res, next){
     const token = query.token;
     jwt.verify(token, process.env.JWT_SECRET, function(err, payload) {
         if(err){
-            res.redirect("/login?emailConfirmStatus=false")
+            res.redirect("/login?emailConfirmStatus=false");
+            return;
         }
         User.findOneAndUpdate({emailConfirmationToken:token},{ isEmailVerified: true, emailConfirmationToken:null },
             function(err, result) {
             if(err){
                 next(err);
+                return;
             }
             res.redirect("/login?emailConfirmStatus=true")
         })

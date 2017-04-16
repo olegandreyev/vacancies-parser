@@ -34,7 +34,7 @@ export default class LoginForm extends React.Component {
                     titleStyle={{fontSize: 21}}
                 />
                 <CardText style={{paddingTop: 0}}>
-                    <form onSubmit={handleSubmit}>
+                    <form id="loginForm" onSubmit={handleSubmit}>
                         <Field fullWidth={true} name="email" component={renderTextField} label="Email"/>
                         <br/>
                         <Field fullWidth={true} name="password" type="password" component={renderTextField} label="Пароль"/>
@@ -44,7 +44,7 @@ export default class LoginForm extends React.Component {
                     </div>
                 </CardText>
                 <CardActions style={{textAlign: 'right'}}>
-                    <RaisedButton disabled={submitting} onClick={handleSubmit} label="Вход" secondary={true}/>
+                    <RaisedButton type="submit" form="loginForm" disabled={submitting} onClick={handleSubmit} label="Вход" secondary={true}/>
                 </CardActions>
                 <Divider/>
                 <CardActions className="login-form-another-actions" style={{padding: 12}}>

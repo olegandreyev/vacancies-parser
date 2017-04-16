@@ -37,7 +37,7 @@ function getQueryStringByObject(searchObj){
        if(i !== 0){
            queryStr+="&"
        }
-       queryStr+=`${param}=${searchObj[param]}`;
+       queryStr+=`${param}=${ encodeURIComponent(searchObj[param]) }`;
        return queryStr;
    },'')
 }

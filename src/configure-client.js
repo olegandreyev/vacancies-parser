@@ -3,6 +3,7 @@
  */
 
 import { replace } from 'react-router-redux'
+import { logout } from 'actions'
 
 export default function(client, {dispatch}){
     client.interceptors.response.use(function (response) {
@@ -10,6 +11,7 @@ export default function(client, {dispatch}){
     }, function (error) {
         if(error.response.status === 401){
             localStorage.removeItem("authToken");
+            dispatch(logout());
             dispatch(replace("/login"));
         }
         return Promise.reject(error);

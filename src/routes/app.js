@@ -34,10 +34,15 @@ export default class App extends React.Component {
         const {user, isAuthenticated, redirect, location:{ pathname } } = this.props;
         let rightAppEl;
         if((pathname === "/" || pathname === '/login') && !isAuthenticated){
+
             rightAppEl = <FlatButton label="Регистрация" onTouchTap={() => redirect('/register')} />;
-        } else if(pathname === '/register'){
+
+        } else if(pathname === '/register'&& !isAuthenticated){
+
             rightAppEl = <FlatButton label="Вход" onTouchTap={() => redirect('/login')} />;
-        } else {
+
+        } else if(isAuthenticated){
+
             rightAppEl =  <IconMenu iconButtonElement={
                     <IconButton><MoreVertIcon /></IconButton>
                 }
@@ -47,6 +52,7 @@ export default class App extends React.Component {
                 <MenuItem primaryText="Настройки" />
                 <MenuItem primaryText="Выход" onTouchTap={this.props.logout} />
             </IconMenu>
+
         }
         return rightAppEl;
     };
