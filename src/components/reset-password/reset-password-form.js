@@ -34,9 +34,9 @@ export default class ResetPasswordForm extends React.Component {
                 />
                 <CardText style={{paddingTop: 0}}>
                     <form id="resetPassword" onSubmit={handleSubmit}>
-                        <Field fullWidth={true} name="password" component={renderTextField} label="New Password"/>
+                        <Field type="password" fullWidth={true} name="password" component={renderTextField} label="New Password"/>
                         <br/>
-                        <Field fullWidth={true} name="confirmPassword" component={renderTextField} label="Repeat Password"/>
+                        <Field type="password" fullWidth={true} name="confirmPassword" component={renderTextField} label="Repeat Password"/>
                     </form>
                 </CardText>
                 <CardActions style={{textAlign: 'right'}}>

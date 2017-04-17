@@ -130,7 +130,12 @@ exports.forgotPassword = function(req, res, next){
         if(!user){
             return res.status(404).json({success:false, message:"Cannot find user with this email address!"})
         }
-        user.resetPasswordToken = generateToken(user);
+        user.resetPasswordToken = generateToken({
+            email:user.email,
+            password: user.password,
+            firstName: user.firstName,
+            lastName: user.lastName
+        });
         user.save(function(err, updatedUser){
             if(err) { return next(err) }
             sendEmail(user.email,`
