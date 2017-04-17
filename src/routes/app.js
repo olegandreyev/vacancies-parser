@@ -37,11 +37,7 @@ export default class App extends React.Component {
 
             rightAppEl = <FlatButton label="Регистрация" onTouchTap={() => redirect('/register')} />;
 
-        } else if(pathname === '/register'&& !isAuthenticated){
-
-            rightAppEl = <FlatButton label="Вход" onTouchTap={() => redirect('/login')} />;
-
-        } else if(isAuthenticated){
+        }  else if(isAuthenticated){
 
             rightAppEl =  <IconMenu iconButtonElement={
                     <IconButton><MoreVertIcon /></IconButton>
@@ -53,6 +49,8 @@ export default class App extends React.Component {
                 <MenuItem primaryText="Выход" onTouchTap={this.props.logout} />
             </IconMenu>
 
+        } else {
+            rightAppEl = <FlatButton label="Вход" onTouchTap={() => redirect('/login')} />;
         }
         return rightAppEl;
     };
