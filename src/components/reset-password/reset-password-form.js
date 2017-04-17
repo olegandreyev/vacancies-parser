@@ -9,29 +9,34 @@ import { renderTextField } from 'helpers'
 import {deepPurple600, red500 } from 'material-ui/styles/colors'
 
 @reduxForm({
-    form:"forgotPassword",
+    form:"resetPassword",
     validate:values => {
         const errors = {};
-        if(!values.email){
-            errors.email = "Обязательное поле!"
+        if(!values.password){
+            errors.password = "Обязательное поле!"
+        }
+        if(values.password !== values.confirmPassword){
+            errors.confirmPassword = "Пароли должны совпадать!"
         }
         return errors;
     }
 })
-export default class ForgotPasswordForm extends React.Component {
+export default class ResetPasswordForm extends React.Component {
     render(){
         const { handleSubmit, submitting, error } = this.props;
         return (
             <Card className="forgot-password-form">
                 <CardHeader
-                    title="Восстановление пароля"
+                    title="Новый пароль"
                     titleColor="white"
                     style={{backgroundColor: deepPurple600}}
                     titleStyle={{fontSize: 21}}
                 />
                 <CardText style={{paddingTop: 0}}>
-                    <form id="forgotPassword" onSubmit={handleSubmit}>
-                        <Field fullWidth={true} name="email" component={renderTextField} label="Email"/>
+                    <form id="resetPassword" onSubmit={handleSubmit}>
+                        <Field fullWidth={true} name="password" component={renderTextField} label="New Password"/>
+                        <br/>
+                        <Field fullWidth={true} name="confirmPassword" component={renderTextField} label="Repeat Password"/>
                     </form>
                 </CardText>
                 <CardActions style={{textAlign: 'right'}}>
@@ -39,10 +44,10 @@ export default class ForgotPasswordForm extends React.Component {
                         {error && <strong>{error}</strong>}
                     </div>
                     <RaisedButton type="submit"
-                                  form="forgotPassword"
+                                  form="resetPassword"
                                   disabled={submitting}
                                   onClick={handleSubmit}
-                                  label="Восстановить"
+                                  label="Подтвердить"
                                   secondary={true}/>
                 </CardActions>
             </Card>

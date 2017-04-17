@@ -16,7 +16,7 @@ import {syncHistoryWithStore} from 'react-router-redux'
 
 import configureStore from './configure-store'
 import configureClient from './configure-client';
-import {App, Login, Register, ForgotPassword, Main, Vacancies, AnalyzeDashboard, VacancyInfo} from 'routes';
+import {App, Login, Register, ForgotPassword, Main, Vacancies, AnalyzeDashboard, VacancyInfo, ResetPassword} from 'routes';
 
 
 const store = configureStore();
@@ -62,6 +62,7 @@ ReactDOM.render(
                 <Route path="login" component={Login}/>
                 <Route path="register" component={Register}>/</Route>
                 <Route path="forgot-password" component={ForgotPassword}/>
+                <Route path="reset-password/:token" component={ResetPassword}/>
                 <Route onEnter={requireAuth}>
                     <Route path="dashboard" component={Main}>
                         <IndexRoute component={AnalyzeDashboard}/>

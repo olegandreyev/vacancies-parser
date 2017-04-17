@@ -9,4 +9,5 @@ export VacancyList from './vacancies/vacancy-list'
 export VacancyFilter from './vacancies/vacancy-filter'
 export Vacancy from './vacancy-info/vacancy'
 export ForgotPasswordForm from './forgot-password/forgot-password-form'
+export ResetPasswordForm from './reset-password/reset-password-form'
 

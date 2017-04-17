@@ -26,6 +26,12 @@ router.post('/auth', requireLogin, AuthMiddleware.isEmailVerified, AuthMiddlewar
 //confirm email route
 router.get("/confirmEmail", AuthMiddleware.confirmEmail);
 
+//forgot password route
+router.post('/forgot', AuthMiddleware.forgotPassword);
+
+//reset password route
+router.post("/resetPassword", AuthMiddleware.resetPassword);
+
 
 // Set url for API group routes
 router.use('/api', requireAuth, apiRoutes);

@@ -7,22 +7,19 @@ import { ForgotPasswordForm } from 'components'
 import {SubmissionError} from 'redux-form'
 import { client }  from 'helpers'
 
-export default class Login extends React.Component {
-    componentDidMount() {
-
-    }
-
+export default class ForgotPassword extends React.Component {
+    state = {
+        successMessage:null
+    };
     onSubmitForm = (values) => {
         return client.post("/forgot", values)
             .then(response => {
-
+                this.setState({successMessage:"Ссылка на изменение пароля была выслана на ваш Email адрес"})
             }).catch(err => {
                 const status = err.response.status;
-                if (status === 401) {
-                    throw new SubmissionError({_error: "Пользователь с таки Email не существует."})
-                } else if(status === 403) {
-                    throw new SubmissionError({_error: err.response.data.error})
-                } else {
+                if (status === 404) {
+                    throw new SubmissionError({_error: "Пользователь с таким Email адресом не существует."})
+                } else  {
                     throw new SubmissionError({_error: "Неизвестная ошибка!"})
                 }
             })
@@ -32,6 +29,7 @@ export default class Login extends React.Component {
         return (
             <div className="forgot-form-wrapper">
                 <ForgotPasswordForm onSubmit={this.onSubmitForm}/>
+                { this.state.successMessage && <p>{this.state.successMessage}</p> }
             </div>
         )
     }

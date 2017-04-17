@@ -49,7 +49,7 @@ export default class LoginForm extends React.Component {
                 <Divider/>
                 <CardActions className="login-form-another-actions" style={{padding: 12}}>
                     <Link to="forgot-password" className="mute-color no-underline">Забыли свой пароль?</Link>
-                    <Link to="register"><span className="">Регистрация</span></Link>
+                    <Link to="register" className="mute-color no-underline">Регистрация</Link>
                 </CardActions>
             </Card>
         )

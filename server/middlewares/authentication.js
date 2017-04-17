@@ -121,6 +121,53 @@ exports.confirmEmail = function(req, res, next){
     });
 };
 
+exports.forgotPassword = function(req, res, next){
+    let email = req.body.email.toString().toLowerCase();
+    User.findOne({ email }, function(err, user){
+        if(err){
+            return next(err);
+        }
+        if(!user){
+            return res.status(404).json({success:false, message:"Cannot find user with this email address!"})
+        }
+        user.resetPasswordToken = generateToken(user);
+        user.save(function(err, updatedUser){
+            if(err) { return next(err) }
+            sendEmail(user.email,`
+                Please click <a href="http://localhost:3000/reset-password/${user.resetPasswordToken}">this link</a>
+                to reset your password (This link will be valid 6 hours)
+            `, "Reset Password");
+            res.status(200).json({success:true, message:"Reset password link has been sent on your email address"})
+        })
+
+    })
+};
+
+exports.resetPassword = function(req, res, next){
+    let { resetPasswordToken, password }  = req.body;
+
+    jwt.verify(resetPasswordToken,  process.env.JWT_SECRET, function(err, payload){
+        if(err){ return res.status(400).json({success:false, message:"Invalid Token!"}) }
+
+        User.findOneAndUpdate({
+            resetPasswordToken
+        }, {
+            resetPasswordToken: null
+        }, function(err, user){
+            if(err){ return next(err) }
+            if(!user){
+                return res.status(400).json({success:false, message:"Invalid Token!"})
+            }
+            user.password = password;
+            user.save(function(err, updatedUser){
+                if(err) { return next(err) }
+                res.status(200).json({success:true, message:"The password has been changed"})
+            })
+        })
+    });
+
+};
+
 
 
 function generateToken(user, expires) {
