@@ -2,7 +2,7 @@
  * Created by Olejka on 27.02.2017.
  */
 
-const SEARCH_KEYWORDS = "Программист, Developer, Разработчик";
+const SEARCH_KEYWORDS = process.env.VACANCY_KEYWORDS;
 const VACANCIES_HOST = "https://work.ua/";
 
 const rp = require('request-promise');

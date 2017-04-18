@@ -34,9 +34,7 @@ export default class Vacancies extends React.Component {
         });
     }
     handleChangePage = curPage => {
-        let {keywords} = this.props.query;
         this.props.searchVacancies({
-            keywords,
             page:curPage
         });
     };
