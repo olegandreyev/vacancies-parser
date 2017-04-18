@@ -49,17 +49,15 @@ router.get("/vacancies/:id", (req, res, next) => {
 
 router.get("/autocomplete",(req, res, next) => {
     const urlObj = url.parse(req.url, true);
-    Vacancy.find({
-        title:{
-            $regex:urlObj.query.text,
-            $options:"is"
-        }
-    },'title').limit(10).exec(function(err, results){
+    Vacancy.aggregate([
+        {$match:{title:{$regex:urlObj.query.text, $options:"is"}}},
+        {$group:{_id:"$title"}},
+        {$limit:10}
+    ], function(err, docs){
         if(err){
-            next(err);
-            return;
+            return next(err);
         }
-        res.json(results.map(v => v.title));
+        res.json(docs.map(v => v._id));
     });
 });
 
